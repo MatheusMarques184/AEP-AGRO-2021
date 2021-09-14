@@ -4,12 +4,10 @@ public class Cooperativa {
     private String NomeCooperativa;
     private String CNPJ;
     private String senha; // 6
-    private String confirmarSenha;
 
-    public Cooperativa(String NomeCoopertiva, String senhaString, String confirmarSenha, String CNPJ) {
+    public Cooperativa(String NomeCoopertiva, String senhaString, String CNPJ) {
         this.setNomeCooperativa(NomeCoopertiva);
         this.setCNPJ(CNPJ);
-        this.setConfirmarSenha(confirmarSenha, senhaString);
         this.setSenha(senhaString);
 
     }
@@ -22,9 +20,6 @@ public class Cooperativa {
         return CNPJ;
     }
 
-    public String getConfirmarSenha() {
-        return confirmarSenha;
-    }
 
     public String getSenha() {
         return senha;
@@ -45,13 +40,6 @@ public class Cooperativa {
         }
 
         this.CNPJ = CNPJ;
-    }
-
-    public void setConfirmarSenha(String confirmarSenha, String senha) {
-        if (confirmarSenha != senha) {
-            throw new RuntimeException("Senhas diferentes");
-        }
-        this.confirmarSenha = confirmarSenha;
     }
 
     public void setSenha(String senha) {

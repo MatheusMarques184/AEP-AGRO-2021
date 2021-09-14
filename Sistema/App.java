@@ -14,6 +14,9 @@ public class App {
         System.out.println("\nCooperativa: " + c.getNomeCooperativa());
         System.out.println("CNPJ " + c.getCNPJ());
     }
+    public static void ImprimirResposavel(Responsavel r) {
+        System.out.println("\nRegistro Responsavel: " + r.getRegistro());
+    }
 
     public static void main(String[] args) { // 02 12 2006
 
@@ -22,8 +25,8 @@ public class App {
         System.out.print("##--         Menu        --##\n\n");
         System.out.print("|-----------------------------|\n");
         System.out.print("| Opção 1 - Produtor          |\n");
-        System.out.print("| Opção 2 - Responsavel       |\n");
-        System.out.print("| Opção 3 - Cooperativa       |\n");
+        System.out.print("| Opção 2 - Cooperativa       |\n");
+        System.out.print("| Opção 3 - Responsavel       |\n");
         System.out.print("| Opção 4 - Sair              |\n");
         System.out.print("|-----------------------------|\n");
         System.out.print("Digite uma opção: ");
@@ -46,11 +49,7 @@ public class App {
 
                 System.out.print("Senha: ");
                 Scanner senha = new Scanner(System.in);
-                String senha2 = senha.nextLine();
-
-                System.out.print("Confirme a senha: ");
-                Scanner confirmaSenha = new Scanner(System.in);
-                String CONFSENHA = confirmaSenha.nextLine();
+                String senhaString = senha.nextLine();
 
                 System.out.print("Email: ");
                 Scanner email = new Scanner(System.in);
@@ -60,32 +59,46 @@ public class App {
                 Scanner num = new Scanner(System.in);
                 String num1 = num.nextLine();
 
-
-                
-                Produtor p1 = new Produtor(nomeProdutor, CPF, DATA, senha2, CONFSENHA, EMAIL, num1);
+                Produtor p1 = new Produtor(nomeProdutor, CPF, DATA, senhaString, EMAIL, num1);
+                System.out.print("\nCadastro realizado com sucesso\n");
                 ImprimirProdutor(p1);
                 break;
 
             case 2:
-                System.out.print("\nOpção Clientes Selecionado\n");
+                System.out.print("Nome Cooperativa: ");
+                Scanner nomeCooperativa = new Scanner(System.in);
+                String nome = nomeCooperativa.nextLine();
+
+                System.out.print("Senha: ");
+                Scanner senhaCooperativa = new Scanner(System.in);
+                String senhacoop = senhaCooperativa.nextLine();
+
+                System.out.print("CNPJ: ");
+                Scanner cnpjCooperativa = new Scanner(System.in);
+                String cnpj = cnpjCooperativa.nextLine();
+
+                Cooperativa coopUM = new Cooperativa(nome, senhacoop, cnpj);
+                ImprimirCooperativa(coopUM);
                 break;
 
             case 3:
-                System.out.print("\nOpção Produtos Selecionado\n");
-                break;
-
-            default:
-                System.out.print("\nOpção Inválida!");
+                System.out.print("Nome responsavel: ");
+                Scanner nomeResponsavel = new Scanner(System.in);
+                String nResponsavel = nomeResponsavel.nextLine();
+                System.out.print("Senha: ");
+                Scanner senhaResponsavel = new Scanner(System.in);
+                String sResponsavel = senhaResponsavel.nextLine();
+                Responsavel res1 = new Responsavel(nResponsavel, sResponsavel);
+                ImprimirResposavel(res1);
                 break;
 
             case 4:
-                System.out.print("\nAté logo!");
                 menu.close();
+                break;
+            default:
+                System.out.print("\nOpção Inválida!");
+                break;
         }
-
-        Cooperativa coopUM = new Cooperativa("Cocamar", "123456", "123456", "12345678911111");
-
-        // ImprimirCooperativa(coopUM);
 
     }
 

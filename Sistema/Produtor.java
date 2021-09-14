@@ -5,21 +5,17 @@ public class Produtor {
     private String nome;
     private String cpf;
     private String senha;
-    private String confirmaSenha;
-    private String data;//02 12 2002
+    private String data;
     private String email;
     private String numeroCelular;
 
-    public Produtor(String nome, String cpf, String data, String senha, String confirmaSenha, String email,
-            String numeroCelular) {
+    public Produtor(String nome, String cpf, String data, String senha, String email, String numeroCelular) {
         this.setCpf(cpf);
         this.setNome(nome);
         this.setNumeroCelular(numeroCelular);
         this.setData(data);
         this.setSenha(senha);
-        this.setConfirmaSenha(confirmaSenha, senha);
         this.setEmail(email);
-
     }
 
     public String getCpf() {
@@ -37,10 +33,6 @@ public class Produtor {
     public String getData() {
         
         return data.substring(0, 2)  +"/"+  data.substring(2, 4) +"/"+ data.substring(4);
-    }
-
-    public String getConfirmaSenha() {
-        return confirmaSenha;
     }
 
     public String getSenha() {
@@ -78,16 +70,6 @@ public class Produtor {
             throw new RuntimeException("Data não existe");
         }
         this.data = data;
-    }
-
-    public void setConfirmaSenha(String confirmaSenha, String senha) {
-        System.out.println("\nSenha:" + senha + "/");
-        System.out.println("\nConfirma:" + confirmaSenha + "/");
-        if (confirmaSenha != senha) {
-            throw new RuntimeException("Senhas diferentes");
-        }
-
-        this.confirmaSenha = confirmaSenha;
     }
 
     public void setSenha(String senha) {
