@@ -1,60 +1,61 @@
 package Sistema;
 
 public class Produtor {
-    private String registroResponsavel;
-    private String nome;
-    private int cpf;
-    private int rg;
-    private String endereco;
-    private int numeroCelular;
 
-    public Produtor(String registroResponsavel, String nome, int cpf, int rg, String endereco, int numeroCelular) {
-        this.setRegistroResponsavel(registroResponsavel);
+    private String nome;
+    private String cpf;
+    private String senha;
+    private String confirmaSenha;
+    private String data;//02 12 2002
+    private String email;
+    private String numeroCelular;
+
+    public Produtor(String nome, String cpf, String data, String senha, String confirmaSenha, String email,
+            String numeroCelular) {
         this.setCpf(cpf);
         this.setNome(nome);
-        this.setRg(rg);
-        this.setEndereco(endereco);
         this.setNumeroCelular(numeroCelular);
+        this.setData(data);
+        this.setSenha(senha);
+        this.setConfirmaSenha(confirmaSenha, senha);
+        this.setEmail(email);
 
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
-    }
-
-    public String getEndereco() {
-        return endereco;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public int getNumeroCelular() {
+    public String getNumeroCelular() {
         return numeroCelular;
     }
 
-    public String getRegistroResponsavel() {
-        return registroResponsavel;
+    public String getData() {
+        
+        return data.substring(0, 2)  +"/"+  data.substring(2, 4) +"/"+ data.substring(4);
     }
 
-    public int getRg() {
-        return rg;
+    public String getConfirmaSenha() {
+        return confirmaSenha;
     }
 
-    public void setCpf(int cpf) {
-        String s = Integer.toString(cpf);
-        if (s.length() != 10) {// ? 11
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setCpf(String cpf) {
+        if (cpf.length() != 11) {// ? 11
             throw new RuntimeException("CPF esta incorreto");
         }
         this.cpf = cpf;
-    }
-
-    public void setEndereco(String endereco) {
-        if (endereco == null) {
-            throw new RuntimeException("Endereço não pode ser nulo");
-        }
-        this.endereco = endereco;
     }
 
     public void setNome(String nome) {
@@ -64,28 +65,40 @@ public class Produtor {
         this.nome = nome;
     }
 
-    public void setNumeroCelular(int numeroCelular) {
-        String s = Integer.toString(numeroCelular);
-        if (s.length() != 9) {
+    public void setNumeroCelular(String numeroCelular) {
+        if (numeroCelular.length() != 11) {
             throw new RuntimeException("Numero de celular esta incorreto");
         }
 
         this.numeroCelular = numeroCelular;
     }
 
-    public void setRegistroResponsavel(String registroResponsavel) {
-        if (registroResponsavel == null) {
-            throw new RuntimeException("Registro não pode ser nulo");
+    public void setData(String data) {
+        if(data == null) {
+            throw new RuntimeException("Data não existe");
         }
-        this.registroResponsavel = registroResponsavel;
+        this.data = data;
     }
 
-    public void setRg(int rg) {
-        String s = Integer.toString(rg);
-        if (s.length() != 8) {
-            throw new RuntimeException("RG esta incorreto");
+    public void setConfirmaSenha(String confirmaSenha, String senha) {
+        System.out.println("\nSenha:" + senha + "/");
+        System.out.println("\nConfirma:" + confirmaSenha + "/");
+        if (confirmaSenha != senha) {
+            throw new RuntimeException("Senhas diferentes");
         }
-        this.rg = rg;
+
+        this.confirmaSenha = confirmaSenha;
+    }
+
+    public void setSenha(String senha) {
+        if (senha == null || senha.length() < 6) {
+            throw new RuntimeException("Senha invalida");
+        }
+        this.senha = senha;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
