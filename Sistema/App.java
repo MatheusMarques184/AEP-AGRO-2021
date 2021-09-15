@@ -21,85 +21,86 @@ public class App {
     public static void main(String[] args) { // 02 12 2006
 
         Scanner menu = new Scanner(System.in);
+        int opcao = 0;
+        do {
+            System.out.print("##--         Menu        --##\n\n");
+            System.out.print("|-----------------------------|\n");
+            System.out.print("| Opção 1 - Cadastro Produtor          |\n");
+            System.out.print("| Opção 2 - Cadastro Cooperativa       |\n");
+            System.out.print("| Opção 3 - Login    Responsavel       |\n");
+            System.out.print("| Opção 4 - Sair              |\n");
+            System.out.print("|-----------------------------|\n");
+            System.out.print("Digite uma opção: ");
+            opcao = menu.nextInt();
+        
+            switch (opcao) {
+                case 1:
+                    System.out.print("Nome produtor: ");
+                    Scanner sc = new Scanner(System.in);
+                    String nomeProdutor = sc.nextLine();
+                
+                    System.out.print("Cpf: ");
+                    Scanner cpf = new Scanner(System.in);
+                    String CPF = cpf.nextLine();
 
-        System.out.print("##--         Menu        --##\n\n");
-        System.out.print("|-----------------------------|\n");
-        System.out.print("| Opção 1 - Produtor          |\n");
-        System.out.print("| Opção 2 - Cooperativa       |\n");
-        System.out.print("| Opção 3 - Responsavel       |\n");
-        System.out.print("| Opção 4 - Sair              |\n");
-        System.out.print("|-----------------------------|\n");
-        System.out.print("Digite uma opção: ");
+                    System.out.print("Data sem espaço: ");
+                    Scanner data = new Scanner(System.in);
+                    String DATA = data.nextLine();
 
-        int opcao = menu.nextInt();
+                    System.out.print("Senha: ");
+                    Scanner senha = new Scanner(System.in);
+                    String senhaString = senha.nextLine();
 
-        switch (opcao) {
-            case 1:
-                System.out.print("Nome produtor: ");
-                Scanner sc = new Scanner(System.in);
-                String nomeProdutor = sc.nextLine();
+                    System.out.print("Email: ");
+                    Scanner email = new Scanner(System.in);
+                    String EMAIL = email.nextLine();
 
-                System.out.print("Cpf: ");
-                Scanner cpf = new Scanner(System.in);
-                String CPF = cpf.nextLine();
+                    System.out.print("Numero de telefone: ");
+                    Scanner num = new Scanner(System.in);
+                    String num1 = num.nextLine();
 
-                System.out.print("Data sem espaço: ");
-                Scanner data = new Scanner(System.in);
-                String DATA = data.nextLine();
+                    Produtor p1 = new Produtor(nomeProdutor, CPF, DATA, senhaString, EMAIL, num1);
+                    System.out.print("\nCadastro realizado com sucesso\n");
+                    ImprimirProdutor(p1);
+                    break;
 
-                System.out.print("Senha: ");
-                Scanner senha = new Scanner(System.in);
-                String senhaString = senha.nextLine();
+                case 2:
+                    System.out.print("Nome Cooperativa: ");
+                    Scanner nomeCooperativa = new Scanner(System.in);
+                    String nome = nomeCooperativa.nextLine();
 
-                System.out.print("Email: ");
-                Scanner email = new Scanner(System.in);
-                String EMAIL = email.nextLine();
+                    System.out.print("Senha: ");
+                    Scanner senhaCooperativa = new Scanner(System.in);
+                    String senhacoop = senhaCooperativa.nextLine();
 
-                System.out.print("Numero de telefone: ");
-                Scanner num = new Scanner(System.in);
-                String num1 = num.nextLine();
+                    System.out.print("CNPJ: ");
+                    Scanner cnpjCooperativa = new Scanner(System.in);
+                    String cnpj = cnpjCooperativa.nextLine();
 
-                Produtor p1 = new Produtor(nomeProdutor, CPF, DATA, senhaString, EMAIL, num1);
-                System.out.print("\nCadastro realizado com sucesso\n");
-                ImprimirProdutor(p1);
-                break;
+                    Cooperativa coopUM = new Cooperativa(nome, senhacoop, cnpj);
+                    System.out.print("\nCadastro realizado com sucesso\n");
+                    ImprimirCooperativa(coopUM);
+                    break;
 
-            case 2:
-                System.out.print("Nome Cooperativa: ");
-                Scanner nomeCooperativa = new Scanner(System.in);
-                String nome = nomeCooperativa.nextLine();
+                case 3:
+                    System.out.print("Nome responsavel: ");
+                    Scanner nomeResponsavel = new Scanner(System.in);
+                    String nResponsavel = nomeResponsavel.nextLine();
+                    System.out.print("Senha: ");
+                    Scanner senhaResponsavel = new Scanner(System.in);
+                    String sResponsavel = senhaResponsavel.nextLine();
+                    Responsavel res1 = new Responsavel(nResponsavel, sResponsavel);
+                    System.out.print("\nLogin realizado com sucesso\n");
+                    ImprimirResposavel(res1);
+                    break;
 
-                System.out.print("Senha: ");
-                Scanner senhaCooperativa = new Scanner(System.in);
-                String senhacoop = senhaCooperativa.nextLine();
-
-                System.out.print("CNPJ: ");
-                Scanner cnpjCooperativa = new Scanner(System.in);
-                String cnpj = cnpjCooperativa.nextLine();
-
-                Cooperativa coopUM = new Cooperativa(nome, senhacoop, cnpj);
-                ImprimirCooperativa(coopUM);
-                break;
-
-            case 3:
-                System.out.print("Nome responsavel: ");
-                Scanner nomeResponsavel = new Scanner(System.in);
-                String nResponsavel = nomeResponsavel.nextLine();
-                System.out.print("Senha: ");
-                Scanner senhaResponsavel = new Scanner(System.in);
-                String sResponsavel = senhaResponsavel.nextLine();
-                Responsavel res1 = new Responsavel(nResponsavel, sResponsavel);
-                ImprimirResposavel(res1);
-                break;
-
-            case 4:
-                menu.close();
-                break;
-            default:
-                System.out.print("\nOpção Inválida!");
-                break;
-        }
-
+                case 4:
+                    menu.close();
+                    break;
+                default:
+                    System.out.print("\nOpção Inválida!");
+                    break;
+            }
+        } while (opcao != 4);
     }
-
 }
