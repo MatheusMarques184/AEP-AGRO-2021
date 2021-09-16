@@ -24,12 +24,12 @@ public class App {
         int opcao = 0;
         do {
             System.out.print("##--         Menu        --##\n\n");
-            System.out.print("|-----------------------------|\n");
-            System.out.print("| Opção 1 - Cadastro Produtor          |\n");
-            System.out.print("| Opção 2 - Cadastro Cooperativa       |\n");
-            System.out.print("| Opção 3 - Login    Responsavel       |\n");
-            System.out.print("| Opção 4 - Sair              |\n");
-            System.out.print("|-----------------------------|\n");
+            System.out.print("|-------------------------------|\n");
+            System.out.print("| Opção 1 - Cadastro Produtor   |\n");
+            System.out.print("| Opção 2 - Cadastro Cooperativa|\n");
+            System.out.print("| Opção 3 - Login    Responsavel|\n");
+            System.out.print("| Opção 4 - Sair                |\n");
+            System.out.print("|-------------------------------|\n");
             System.out.print("Digite uma opção: ");
             opcao = menu.nextInt();
         
