@@ -1,10 +1,10 @@
 package Sistema;
 
-public class Responsavel {
+public class LoginResponsavel {
     private String Registro;
     private String Senha;
 
-    public Responsavel(String registro, String senha){
+    public LoginResponsavel(String registro, String senha){
         this.setSenha(senha);
         this.setRegistro(registro);
     }
