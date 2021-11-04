@@ -3,9 +3,13 @@ package Sistema;
 public class Login {
     String nome;
     String senha;
+    String registro;
     
     public String getNome() {
         return nome;
+    }
+    public String getRegistro() {
+        return registro;
     }
     public String getSenha() {
         return senha;
@@ -18,6 +22,9 @@ public class Login {
     }
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    public void setRegistro(String registro) {
+        this.registro = registro;
     }
 
 

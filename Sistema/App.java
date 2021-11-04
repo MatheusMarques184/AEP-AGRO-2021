@@ -5,24 +5,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static void ImprimirProdutor(CadastroProdutor p) {
+    public static void ImprimirProdutor(Produtor p) {
 
         System.out.println("\nProdutor: " + p.getNome());
         System.out.println("CPF " + p.getCpf() + " - Celular " + p.getNumeroCelular() + " - Data nascimento "
                 + p.getData() + " - Email " + p.getEmail());
     }
 
-    public static void ImprimirCooperativa(CadastroCooperativa c) {
+    public static void ImprimirCooperativa(Cooperativa c) {
         System.out.println("\nCooperativa: " + c.getNomeCooperativa());
         System.out.println("CNPJ " + c.getCNPJ());
     }
 
-    public static void ImprimirResposavel(LoginResponsavel r) {
+    /*public static void ImprimirResposavel(LoginResponsavel r) {
         System.out.println("\nRegistro Responsavel: " + r.getRegistro());
-    }
+    }*/
 
     // ----------------------------------------------------------------------------------
-    public static void RealizarCadastroProdutor(CadastroProdutor cadastro, Scanner menu) {
+    public static void RealizarCadastroProdutor(Produtor cadastro, Scanner menu) {
         System.out.print("Nome produtor: ");
         Scanner sc = new Scanner(System.in);
         String nomeProdutor = sc.nextLine();
@@ -54,7 +54,7 @@ public class App {
         cadastro.setNumeroCelular(num1);
     }
 
-    private static void RealizarCadastroCooperativa(CadastroCooperativa cadastro, Scanner menu) {
+    public static void RealizarCadastroCooperativa(Cooperativa cadastro, Scanner menu) {
         System.out.print("Nome Cooperativa: ");
         Scanner nomeCooperativa = new Scanner(System.in);
         String nome = nomeCooperativa.nextLine();
@@ -72,7 +72,9 @@ public class App {
 
     }
 
-    public static void RealizarLoginProdutor(CadastroProdutor cadastro, Scanner menu, Login loginGeral) {
+    public static void RealizarLoginProdutor(Produtor cadastro, Scanner menu, Login loginGeral,
+            List<Demanda> list) {
+        System.out.println(" LOGIN ");
         System.out.print("Nome produtor: ");
         Scanner sc = new Scanner(System.in);
         String nomeProdutor = sc.nextLine();
@@ -85,13 +87,17 @@ public class App {
         if ((loginGeral.getNome().equals(cadastro.getNome()) && (loginGeral.getSenha().equals(cadastro.getSenha())))
                 || (loginGeral.getNome().equals("usuario")) && (loginGeral.getSenha().equals("1234567"))) {
             System.out.println("Login valido");
-            // fazer o resto
+            MenuLogin(menu, list);
+
         } else {
             System.out.println("Login invalido");
         }
     }
 
-    private static void RealizarLoginCooperativa(CadastroCooperativa cadastro, Scanner menu, Login loginGeral) {
+    public static void RealizarLoginCooperativa(Cooperativa cadastro, Scanner menu, Login loginGeral,
+            Demanda demanda, List<Demanda> list) {
+
+        System.out.println(" LOGIN ");
         System.out.print("Nome Cooperativa: ");
         Scanner nomeCooperativa = new Scanner(System.in);
         String nome = nomeCooperativa.nextLine();
@@ -106,21 +112,75 @@ public class App {
                 || (loginGeral.getNome().equals("usuario")) && (loginGeral.getSenha().equals("1234567"))) {
             System.out.println("Login valido");
             // fazer o resto
+            InformarDemanda(demanda, menu, list);
         } else {
             System.out.println("Login invalido");
         }
     }
 
+    public static void InformarDemanda(Demanda demanda, Scanner menu, List<Demanda> list) {
+        //Fazer Loop para poder colocar mais de uma demanda
+        System.out.println("Informe demanda: ");
+        Scanner nomeDemanda = new Scanner(System.in);
+        String dem = nomeDemanda.nextLine();
+
+        demanda.setDemanda(dem);
+        System.out.println("Quantidade demanda: ");
+        Scanner quantidadeDemanda = new Scanner(System.in);
+        String qDem = quantidadeDemanda.nextLine();
+        demanda.setQdemanda(qDem);
+        list.add(demanda);
+        System.out.println("foi");
+    }
+
+    public static void ConsultarDemanda(List<Demanda> list) {
+        for (Demanda demanda2 : list) {
+            System.out.println("Demanda: " + demanda2.getDemanda() + "\nQuantidade Demanda: " + demanda2.getQdemanda());
+        }
+    }
+
+    public static void MenuLogin(Scanner menu, List<Demanda> list) {
+        int opcao = 0;
+        do {
+            System.out.print("##--         Menu         --##\n\n");
+            System.out.print("|--------------------------------|\n");
+            System.out.print("| Opção 1 - Consultar Demanda    |\n");
+            System.out.print("| Opção 2 - Criar Responsavel    |\n");
+            System.out.print("| Opção 3 - Consultar Responsavel|\n");
+            System.out.print("| Opção 4 - Editar Responsavel   |\n");
+            System.out.print("| Opção 5 - Excluir Responsavel  |\n");
+            System.out.print("| Opção 6 - Sair                 |\n");
+            System.out.print("|--------------------------------|\n");
+            System.out.print("Digite uma opção: ");
+            opcao = menu.nextInt();
+
+            switch (opcao) {
+            case 1:
+                ConsultarDemanda(list);
+                break;
+            case 2:
+
+            case 3:
+
+            case 4:
+
+            case 5:
+
+            case 6:
+            }
+        }while (opcao != 6);
+    }
+
     public static void main(String[] args) {
 
         Scanner menu = new Scanner(System.in);
-        CadastroProdutor cadastroP = new CadastroProdutor();
-        CadastroCooperativa cadastroC = new CadastroCooperativa();
+        Produtor cadastroP = new Produtor();
+        Cooperativa cadastroC = new Cooperativa();
+        Responsavel responsavel = new Responsavel();
         Login loginGeral = new Login();
-        Produtor produtor = new Produtor();
-        Cooperativa cooperativa = new Cooperativa();
         Demanda demanda = new Demanda();
         List<Demanda> listaDemanda = new ArrayList<>();
+        List<Responsavel> listaResponsavel = new ArrayList<>();
 
         int opcao = 0;
         do {
@@ -152,41 +212,27 @@ public class App {
                 System.out.print("\nCadastro realizado com sucesso\n");
 
                 break;
-            case 3:// mudar
-                System.out.print("Nome responsavel: ");
-                Scanner nomeResponsavel = new Scanner(System.in);
-                String nResponsavel = nomeResponsavel.nextLine();
+            case 3:
+                System.out.print("Registro responsavel: ");
+                Scanner registroResponsavel = new Scanner(System.in);
+                String rResponsavel = registroResponsavel.nextLine();
+                loginGeral.setRegistro(rResponsavel);
+
                 System.out.print("Senha: ");
                 Scanner senhaResponsavel = new Scanner(System.in);
                 String sResponsavel = senhaResponsavel.nextLine();
-                LoginResponsavel loginR = new LoginResponsavel(nResponsavel, sResponsavel);
+                loginGeral.setSenha(sResponsavel);
+
+                
                 System.out.print("\nLogin realizado com sucesso\n");
-                ImprimirResposavel(loginR);
+                //ImprimirResposavel(loginR);
                 break;
 
             case 4:
-                // LoginProdutor
-                RealizarLoginProdutor(cadastroP, menu, loginGeral);
+                RealizarLoginProdutor(cadastroP, menu, loginGeral, listaDemanda);
                 break;
             case 5:
-                // LoginCooperativa
-                RealizarLoginCooperativa(cadastroC, menu, loginGeral);
-
-                System.out.println("Informe demanda: ");
-                Scanner nomeDemanda = new Scanner(System.in);
-                String dem = nomeDemanda.nextLine();
-                demanda.setDemanda(dem);
-
-                System.out.println("Quantidade demanda: ");
-                Scanner quantidadeDemanda = new Scanner(System.in);
-                String qDem = quantidadeDemanda.nextLine();
-                demanda.setQdemanda(qDem);
-
-                listaDemanda.add(demanda);
-                for (Demanda demanda2 : listaDemanda) {
-                    System.out.println("Demanda: " + demanda2.getDemanda());
-                }
-
+                RealizarLoginCooperativa(cadastroC, menu, loginGeral, demanda, listaDemanda);
                 break;
             case 6:
                 menu.close();
@@ -195,6 +241,7 @@ public class App {
                 System.out.print("\nOpção Inválida!");
                 break;
             }
-        } while (opcao != 4);
+        } while (opcao != 6);
     }
+
 }
