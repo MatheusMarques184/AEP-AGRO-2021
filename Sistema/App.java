@@ -17,9 +17,10 @@ public class App {
         System.out.println("CNPJ " + c.getCNPJ());
     }
 
-    /*public static void ImprimirResposavel(LoginResponsavel r) {
-        System.out.println("\nRegistro Responsavel: " + r.getRegistro());
-    }*/
+    /*
+     * public static void ImprimirResposavel(LoginResponsavel r) {
+     * System.out.println("\nRegistro Responsavel: " + r.getRegistro()); }
+     */
 
     // ----------------------------------------------------------------------------------
     public static void RealizarCadastroProdutor(Produtor cadastro, Scanner menu) {
@@ -72,8 +73,7 @@ public class App {
 
     }
 
-    public static void RealizarLoginProdutor(Produtor cadastro, Scanner menu, Login loginGeral,
-            List<Demanda> list) {
+    public static void RealizarLoginProdutor(Produtor cadastro, Scanner menu, Login loginGeral, List<Demanda> list) {
         System.out.println(" LOGIN ");
         System.out.print("Nome produtor: ");
         Scanner sc = new Scanner(System.in);
@@ -94,8 +94,8 @@ public class App {
         }
     }
 
-    public static void RealizarLoginCooperativa(Cooperativa cadastro, Scanner menu, Login loginGeral,
-            Demanda demanda, List<Demanda> list) {
+    public static void RealizarLoginCooperativa(Cooperativa cadastro, Scanner menu, Login loginGeral, Demanda demanda,
+            List<Demanda> list) {
 
         System.out.println(" LOGIN ");
         System.out.print("Nome Cooperativa: ");
@@ -111,15 +111,14 @@ public class App {
                 && (loginGeral.getSenha().equals(cadastro.getSenha())))
                 || (loginGeral.getNome().equals("usuario")) && (loginGeral.getSenha().equals("1234567"))) {
             System.out.println("Login valido");
-            // fazer o resto
-            InformarDemanda(demanda, menu, list);
+            MenuCooperativa(demanda, menu, list);
         } else {
             System.out.println("Login invalido");
         }
     }
 
     public static void InformarDemanda(Demanda demanda, Scanner menu, List<Demanda> list) {
-        //Fazer Loop para poder colocar mais de uma demanda
+        // Fazer Loop para poder colocar mais de uma demanda
         System.out.println("Informe demanda: ");
         Scanner nomeDemanda = new Scanner(System.in);
         String dem = nomeDemanda.nextLine();
@@ -145,11 +144,15 @@ public class App {
             System.out.print("##--         Menu         --##\n\n");
             System.out.print("|--------------------------------|\n");
             System.out.print("| Opção 1 - Consultar Demanda    |\n");
-            System.out.print("| Opção 2 - Criar Responsavel    |\n");
+            System.out.print("| Opção 2 - Criar     Responsavel|\n");
             System.out.print("| Opção 3 - Consultar Responsavel|\n");
-            System.out.print("| Opção 4 - Editar Responsavel   |\n");
-            System.out.print("| Opção 5 - Excluir Responsavel  |\n");
-            System.out.print("| Opção 6 - Sair                 |\n");
+            System.out.print("| Opção 4 - Editar    Responsavel|\n");
+            System.out.print("| Opção 5 - Excluir   Responsavel|\n");
+            System.out.print("| Opção 6 - Criar     Lote       |\n");
+            System.out.print("| Opção 7 - Consultar Lote       |\n");
+            System.out.print("| Opção 8 - Editar    Lote       |\n");
+            System.out.print("| Opção 9 - Excluir   Lote       |\n");
+            System.out.print("| Opção 10 - Sair                 |\n");
             System.out.print("|--------------------------------|\n");
             System.out.print("Digite uma opção: ");
             opcao = menu.nextInt();
@@ -167,8 +170,39 @@ public class App {
             case 5:
 
             case 6:
+                
+            case 7:
+
+            case 8:
+
+            case 9:
+
+            case 10:
+            //menu.close();
+            break;
             }
-        }while (opcao != 6);
+        } while (opcao != 6);
+    }
+
+    public static void MenuCooperativa(Demanda demanda,Scanner menu, List<Demanda> list) {
+        int opcao = 0;
+        do {
+            System.out.print("##--         Menu         --##\n\n");
+            System.out.print("|--------------------------------|\n");
+            System.out.print("| Opção 1 - informar Demanda    |\n");
+            System.out.print("| Opção 2 - Sair                 |\n");
+            System.out.print("|--------------------------------|\n");
+            System.out.print("Digite uma opção: ");
+            opcao = menu.nextInt();
+
+            switch (opcao) {
+            case 1:
+                InformarDemanda(demanda, menu, list);
+                break;
+            case 2:
+            
+            }
+        }while(opcao != 2);
     }
 
     public static void main(String[] args) {
@@ -223,9 +257,8 @@ public class App {
                 String sResponsavel = senhaResponsavel.nextLine();
                 loginGeral.setSenha(sResponsavel);
 
-                
                 System.out.print("\nLogin realizado com sucesso\n");
-                //ImprimirResposavel(loginR);
+                // ImprimirResposavel(loginR);
                 break;
 
             case 4:
