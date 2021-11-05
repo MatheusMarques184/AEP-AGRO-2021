@@ -73,7 +73,8 @@ public class App {
 
     }
 
-    public static void RealizarLoginProdutor(Produtor cadastro, Scanner menu, Login loginGeral, List<Demanda> list) {
+    public static void RealizarLoginProdutor(Produtor cadastro, Scanner menu, Login loginGeral, List<Demanda> list,
+            Responsavel responsavel, List<Responsavel> listaResponsavel) {
         System.out.println(" LOGIN ");
         System.out.print("Nome produtor: ");
         Scanner sc = new Scanner(System.in);
@@ -87,7 +88,7 @@ public class App {
         if ((loginGeral.getNome().equals(cadastro.getNome()) && (loginGeral.getSenha().equals(cadastro.getSenha())))
                 || (loginGeral.getNome().equals("usuario")) && (loginGeral.getSenha().equals("1234567"))) {
             System.out.println("Login valido");
-            MenuLogin(menu, list);
+            MenuLogin(menu, list, responsavel, listaResponsavel);
 
         } else {
             System.out.println("Login invalido");
@@ -138,7 +139,42 @@ public class App {
         }
     }
 
-    public static void MenuLogin(Scanner menu, List<Demanda> list) {
+    public static void CadastrarResponsavel(Scanner menu, Responsavel responsavel, List<Responsavel> listaResponsavel) {
+        System.out.print("Nome Responsavel: ");
+        Scanner res = new Scanner(System.in);
+        String nomeResponsavel = res.nextLine();
+        responsavel.setNome(nomeResponsavel);
+
+        System.out.print("Registro Responsavel: ");
+        Scanner registro = new Scanner(System.in);
+        String registroResponsavel = registro.nextLine();
+        responsavel.setRegistro(registroResponsavel);
+
+        // endereco
+
+        System.out.print("CPF: ");
+        Scanner cpf = new Scanner(System.in);
+        String cpfResponsavel = cpf.nextLine();
+        responsavel.setCpf(cpfResponsavel);
+
+        System.out.print("RG: ");
+        Scanner rg = new Scanner(System.in);
+        String rgResponsavel = rg.nextLine();
+        responsavel.setRg(rgResponsavel);
+
+        System.out.print("Senha: ");
+        Scanner senha = new Scanner(System.in);
+        String senhaResponsavel = senha.nextLine();
+        responsavel.setSenha(senhaResponsavel);
+
+        listaResponsavel.add(responsavel);
+        for (Responsavel responsavel2 : listaResponsavel) {
+            System.out.println("Nome responsavel: " + responsavel2.getNome());
+        }
+    }
+
+    public static void MenuLogin(Scanner menu, List<Demanda> list, Responsavel responsavel,
+            List<Responsavel> listaResponsavel) {
         int opcao = 0;
         do {
             System.out.print("##--         Menu         --##\n\n");
@@ -162,7 +198,7 @@ public class App {
                 ConsultarDemanda(list);
                 break;
             case 2:
-
+                CadastrarResponsavel(menu, responsavel, listaResponsavel);
             case 3:
 
             case 4:
@@ -181,7 +217,7 @@ public class App {
                 // menu.close();
                 break;
             }
-        } while (opcao != 6);
+        } while (opcao != 10);
     }
 
     public static void MenuCooperativa(Demanda demanda, Scanner menu, List<Demanda> list) {
@@ -218,7 +254,7 @@ public class App {
 
         int opcao = 0;
         do {
-            //System.out.flush();
+            // System.out.flush();
             System.out.print("##--         Menu        --##\n\n");
             System.out.print("|-------------------------------|\n");
             System.out.print("| Opção 1 - Cadastro Produtor   |\n");
@@ -262,7 +298,7 @@ public class App {
                 break;
 
             case 4:
-                RealizarLoginProdutor(cadastroP, menu, loginGeral, listaDemanda);
+                RealizarLoginProdutor(cadastroP, menu, loginGeral, listaDemanda, responsavel, listaResponsavel);
                 break;
             case 5:
                 RealizarLoginCooperativa(cadastroC, menu, loginGeral, demanda, listaDemanda);

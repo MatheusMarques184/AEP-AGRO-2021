@@ -27,4 +27,35 @@ public class Responsavel {
         this.senha = senha;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
 }
