@@ -1,8 +1,10 @@
 package Sistema;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class App {
     public static void ImprimirProdutor(Produtor p) {
@@ -120,26 +122,31 @@ public class App {
 
     public static void InformarDemanda(Demanda demanda, Scanner menu, List<Demanda> list) {
         // Fazer Loop para poder colocar mais de uma demanda
-        System.out.println("Informe demanda: ");
-        Scanner nomeDemanda = new Scanner(System.in);
-        String dem = nomeDemanda.nextLine();
+        while (true) {
+            System.out.println("Informe demanda: ");
+            Scanner nomeDemanda = new Scanner(System.in);
+            String dem = nomeDemanda.nextLine();
+            demanda.setDemanda(dem);
+            list.add(demanda);
 
-        demanda.setDemanda(dem);
-        System.out.println("Quantidade demanda: ");
-        Scanner quantidadeDemanda = new Scanner(System.in);
-        String qDem = quantidadeDemanda.nextLine();
-        demanda.setQdemanda(qDem);
-        list.add(demanda);
-        System.out.println("foi");
+            System.out.println("Você possuí " + list.size() + " de Demanda. Deseja continuar (S/N)? ");
+            Scanner continuarDeamnda = new Scanner(System.in);
+            String continuar = continuarDeamnda.nextLine();
+            if (continuar.equalsIgnoreCase("N")) {
+                break;
+            }
+        }
+        // System.out.println("foi");
     }
 
     public static void ConsultarDemanda(List<Demanda> list) {
         for (Demanda demanda2 : list) {
-            System.out.println("Demanda: " + demanda2.getDemanda() + "\nQuantidade Demanda: " + demanda2.getQdemanda());
+            System.out.println("Demanda: " + demanda2.getDemanda());
         }
     }
 
     public static void CadastrarResponsavel(Scanner menu, Responsavel responsavel, List<Responsavel> listaResponsavel) {
+
         System.out.print("Nome Responsavel: ");
         Scanner res = new Scanner(System.in);
         String nomeResponsavel = res.nextLine();
@@ -168,14 +175,21 @@ public class App {
         responsavel.setSenha(senhaResponsavel);
 
         listaResponsavel.add(responsavel);
+
     }
 
     public static void ConsultarResponsavel(Responsavel responsavel, List<Responsavel> listaResponsavel) {
+        // Regra negocio apenas 1 responsavel ser cadastrado no sistema
         for (Responsavel responsavel2 : listaResponsavel) {
-            System.out.println("Nome responsavel: " + responsavel2.getNome() + "\nRegistro Responsavel: "
-                    + responsavel2.getRegistro() + "\nEndereco: " + "\nCPF: " + responsavel2.getCpf() + "\nRG: "
-                    + responsavel2.getRg() + "\nSenha: " + responsavel2.getSenha());
+            System.out.println("Nome: " + responsavel2.getNome() + "\nRegistro: " + responsavel2.getRegistro()
+                    + "\nEndereco: " + "\nCPF: " + responsavel2.getCpf() + "\nRG: " + responsavel2.getRg() + "Senha: "
+                    + responsavel2.getSenha());
         }
+    }
+
+    public static void ExcluirResponsavel(Responsavel responsavel, List<Responsavel> listaResponsavel) {
+        listaResponsavel.remove(responsavel);
+        System.out.println("Removido com sucesso!");
     }
 
     public static void MenuLogin(Scanner menu, List<Demanda> list, Responsavel responsavel,
@@ -211,7 +225,7 @@ public class App {
             case 4:
 
             case 5:
-
+                ExcluirResponsavel(responsavel, listaResponsavel);
             case 6:
 
             case 7:
