@@ -25,51 +25,51 @@ public class App {
     // ----------------------------------------------------------------------------------
     public static void RealizarCadastroProdutor(Produtor cadastro, Scanner menu) {
         System.out.print("Nome produtor: ");
-        Scanner sc = new Scanner(System.in);
-        String nomeProdutor = sc.nextLine();
+        Scanner nome = new Scanner(System.in);
+        String nomeProdutor = nome.nextLine();
         cadastro.setNome(nomeProdutor);
 
         System.out.print("Cpf: ");
         Scanner cpf = new Scanner(System.in);
-        String CPF = cpf.nextLine();
-        cadastro.setCpf(CPF);
+        String cpfProdutor = cpf.nextLine();
+        cadastro.setCpf(cpfProdutor);
 
         System.out.print("Data sem espaço: ");
         Scanner data = new Scanner(System.in);
-        String DATA = data.nextLine();
-        cadastro.setData(DATA);
+        String dataProdutor = data.nextLine();
+        cadastro.setData(dataProdutor);
 
         System.out.print("Senha: ");
         Scanner senha = new Scanner(System.in);
-        String senhaString = senha.nextLine();
-        cadastro.setSenha(senhaString);
+        String senhaProdutor = senha.nextLine();
+        cadastro.setSenha(senhaProdutor);
 
         System.out.print("Email: ");
         Scanner email = new Scanner(System.in);
-        String EMAIL = email.nextLine();
-        cadastro.setEmail(EMAIL);
+        String emailProdutor = email.nextLine();
+        cadastro.setEmail(emailProdutor);
 
         System.out.print("Numero de telefone: ");
         Scanner num = new Scanner(System.in);
-        String num1 = num.nextLine();
-        cadastro.setNumeroCelular(num1);
+        String numProdutor = num.nextLine();
+        cadastro.setNumeroCelular(numProdutor);
     }
 
     public static void RealizarCadastroCooperativa(Cooperativa cadastro, Scanner menu) {
         System.out.print("Nome Cooperativa: ");
-        Scanner nomeCooperativa = new Scanner(System.in);
-        String nome = nomeCooperativa.nextLine();
-        cadastro.setNomeCooperativa(nome);
+        Scanner nome = new Scanner(System.in);
+        String nomeCooperativa = nome.nextLine();
+        cadastro.setNomeCooperativa(nomeCooperativa);
 
         System.out.print("Senha: ");
-        Scanner senhaCooperativa = new Scanner(System.in);
-        String senha = senhaCooperativa.nextLine();
-        cadastro.setSenha(senha);
+        Scanner senha = new Scanner(System.in);
+        String senhaCooperativa = senha.nextLine();
+        cadastro.setSenha(senhaCooperativa);
 
         System.out.print("CNPJ: ");
-        Scanner cnpjCooperativa = new Scanner(System.in);
-        String cnpj = cnpjCooperativa.nextLine();
-        cadastro.setCNPJ(cnpj);
+        Scanner cnpj = new Scanner(System.in);
+        String cnpjCooperativa = cnpj.nextLine();
+        cadastro.setCNPJ(cnpjCooperativa);
 
     }
 
@@ -77,13 +77,13 @@ public class App {
             Responsavel responsavel, List<Responsavel> listaResponsavel) {
         System.out.println(" LOGIN ");
         System.out.print("Nome produtor: ");
-        Scanner sc = new Scanner(System.in);
-        String nomeProdutor = sc.nextLine();
+        Scanner nome = new Scanner(System.in);
+        String nomeProdutor = nome.nextLine();
         loginGeral.setNome(nomeProdutor);
         System.out.print("Senha: ");
         Scanner senha = new Scanner(System.in);
-        String senhaString = senha.nextLine();
-        loginGeral.setSenha(senhaString);
+        String senhaProdutor = senha.nextLine();
+        loginGeral.setSenha(senhaProdutor);
 
         if ((loginGeral.getNome().equals(cadastro.getNome()) && (loginGeral.getSenha().equals(cadastro.getSenha())))
                 || (loginGeral.getNome().equals("usuario")) && (loginGeral.getSenha().equals("1234567"))) {
@@ -100,13 +100,13 @@ public class App {
 
         System.out.println(" LOGIN ");
         System.out.print("Nome Cooperativa: ");
-        Scanner nomeCooperativa = new Scanner(System.in);
-        String nome = nomeCooperativa.nextLine();
-        loginGeral.setNome(nome);
+        Scanner nome = new Scanner(System.in);
+        String nomeCooperativa = nome.nextLine();
+        loginGeral.setNome(nomeCooperativa);
         System.out.print("Senha: ");
-        Scanner senhaCooperativa = new Scanner(System.in);
-        String senhacoop = senhaCooperativa.nextLine();
-        loginGeral.setSenha(senhacoop);
+        Scanner senha = new Scanner(System.in);
+        String senhaCooperativa = senha.nextLine();
+        loginGeral.setSenha(senhaCooperativa);
 
         if ((loginGeral.getNome().equals(cadastro.getNomeCooperativa())
                 && (loginGeral.getSenha().equals(cadastro.getSenha())))
@@ -168,8 +168,13 @@ public class App {
         responsavel.setSenha(senhaResponsavel);
 
         listaResponsavel.add(responsavel);
+    }
+
+    public static void ConsultarResponsavel(Responsavel responsavel, List<Responsavel> listaResponsavel) {
         for (Responsavel responsavel2 : listaResponsavel) {
-            System.out.println("Nome responsavel: " + responsavel2.getNome());
+            System.out.println("Nome responsavel: " + responsavel2.getNome() + "\nRegistro Responsavel: "
+                    + responsavel2.getRegistro() + "\nEndereco: " + "\nCPF: " + responsavel2.getCpf() + "\nRG: "
+                    + responsavel2.getRg() + "\nSenha: " + responsavel2.getSenha());
         }
     }
 
@@ -199,8 +204,10 @@ public class App {
                 break;
             case 2:
                 CadastrarResponsavel(menu, responsavel, listaResponsavel);
+                break;
             case 3:
-
+                ConsultarResponsavel(responsavel, listaResponsavel);
+                break;
             case 4:
 
             case 5:
@@ -225,7 +232,7 @@ public class App {
         do {
             System.out.print("##--         Menu         --##\n\n");
             System.out.print("|--------------------------------|\n");
-            System.out.print("| Opção 1 - Informar Demanda    |\n");
+            System.out.print("| Opção 1 - Informar Demanda     |\n");
             System.out.print("| Opção 2 - Sair                 |\n");
             System.out.print("|--------------------------------|\n");
             System.out.print("Digite uma opção: ");
@@ -241,6 +248,7 @@ public class App {
         } while (opcao != 2);
     }
 
+    // ---MAIN
     public static void main(String[] args) {
 
         Scanner menu = new Scanner(System.in);
@@ -283,6 +291,7 @@ public class App {
 
                 break;
             case 3:
+                // mudar
                 System.out.print("Registro responsavel: ");
                 Scanner registroResponsavel = new Scanner(System.in);
                 String rResponsavel = registroResponsavel.nextLine();
