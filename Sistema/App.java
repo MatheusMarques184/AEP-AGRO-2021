@@ -121,7 +121,6 @@ public class App {
     }
 
     public static void InformarDemanda(Scanner menu, List<Demanda> list) {
-        // Fazer Loop para poder colocar mais de uma demanda
         while (true) {
             Demanda demanda = new Demanda();
             System.out.println("Informe demanda: ");
@@ -213,7 +212,7 @@ public class App {
             System.out.print("| Opção 7 - Consultar Lote       |\n");
             System.out.print("| Opção 8 - Editar    Lote       |\n");
             System.out.print("| Opção 9 - Excluir   Lote       |\n");
-            System.out.print("| Opção 10 - Sair                 |\n");
+            System.out.print("| Opção 10 - Sair                |\n");
             System.out.print("|--------------------------------|\n");
             System.out.print("Digite uma opção: ");
             opcao = menu.nextInt();
@@ -229,9 +228,9 @@ public class App {
                 ConsultarResponsavel(listaResponsavel);
                 break;
             case 4:
-
+                // editar Responsavel
             case 5:
-                ExcluirResponsavel(listaResponsavel);
+                ExcluirResponsavel(listaResponsavel);// terminar
                 break;
             case 6:
 
@@ -310,16 +309,25 @@ public class App {
 
                 break;
             case 3:
-                // mudar
                 System.out.print("Registro responsavel: ");
                 Scanner registroResponsavel = new Scanner(System.in);
                 String rResponsavel = registroResponsavel.nextLine();
                 loginGeral.setRegistro(rResponsavel);
-
                 System.out.print("Senha: ");
                 Scanner senhaResponsavel = new Scanner(System.in);
                 String sResponsavel = senhaResponsavel.nextLine();
                 loginGeral.setSenha(sResponsavel);
+                for (int i = 0; i < listaResponsavel.size(); i++) {
+                    if ((loginGeral.getRegistro().equals(listaResponsavel.get(i).getRegistro()))
+                            && ((loginGeral.getSenha().equals(listaResponsavel.get(i).getSenha())))
+                            || ((loginGeral.getRegistro().equals("usuario"))
+                                    && (loginGeral.getSenha().equals("1234567")))) {
+
+                    }
+                    else {
+                        System.out.println("Login invalido");
+                    }
+                }
 
                 System.out.print("\nLogin realizado com sucesso\n");
                 // ImprimirResposavel(loginR);
