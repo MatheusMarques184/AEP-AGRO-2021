@@ -170,7 +170,7 @@ public class App {
             case 5:
 
             case 6:
-                
+
             case 7:
 
             case 8:
@@ -178,18 +178,18 @@ public class App {
             case 9:
 
             case 10:
-            //menu.close();
-            break;
+                // menu.close();
+                break;
             }
         } while (opcao != 6);
     }
 
-    public static void MenuCooperativa(Demanda demanda,Scanner menu, List<Demanda> list) {
+    public static void MenuCooperativa(Demanda demanda, Scanner menu, List<Demanda> list) {
         int opcao = 0;
         do {
             System.out.print("##--         Menu         --##\n\n");
             System.out.print("|--------------------------------|\n");
-            System.out.print("| Opção 1 - informar Demanda    |\n");
+            System.out.print("| Opção 1 - Informar Demanda    |\n");
             System.out.print("| Opção 2 - Sair                 |\n");
             System.out.print("|--------------------------------|\n");
             System.out.print("Digite uma opção: ");
@@ -200,9 +200,9 @@ public class App {
                 InformarDemanda(demanda, menu, list);
                 break;
             case 2:
-            
+                break;
             }
-        }while(opcao != 2);
+        } while (opcao != 2);
     }
 
     public static void main(String[] args) {
@@ -218,7 +218,7 @@ public class App {
 
         int opcao = 0;
         do {
-            // System.out.flush();
+            //System.out.flush();
             System.out.print("##--         Menu        --##\n\n");
             System.out.print("|-------------------------------|\n");
             System.out.print("| Opção 1 - Cadastro Produtor   |\n");
