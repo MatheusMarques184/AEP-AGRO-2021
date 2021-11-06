@@ -147,6 +147,7 @@ public class App {
     public static void CadastrarResponsavel(Scanner menu, List<Responsavel> listaResponsavel) {
         while (true) {
             Responsavel responsavel = new Responsavel();
+            Endereco endereco = new Endereco();
             System.out.print("Nome Responsavel: ");
             Scanner res = new Scanner(System.in);
             String nomeResponsavel = res.nextLine();
@@ -157,7 +158,25 @@ public class App {
             String registroResponsavel = registro.nextLine();
             responsavel.setRegistro(registroResponsavel);
 
-            // endereco
+            System.out.print("CEP: ");
+            Scanner cep = new Scanner(System.in);
+            String cepResponsavel = cep.nextLine();
+            endereco.setCep(cepResponsavel);
+
+            System.out.print("Rua: ");
+            Scanner rua = new Scanner(System.in);
+            String ruaEndereco = rua.nextLine();
+            endereco.setRua(ruaEndereco);
+
+            System.out.print("Bairro: ");
+            Scanner bairro = new Scanner(System.in);
+            String bairroEndereco = bairro.nextLine();
+            endereco.setBairro(bairroEndereco);
+
+            System.out.print("Numero Residencia: ");
+            Scanner numero = new Scanner(System.in);
+            String numeroRes = numero.nextLine();
+            endereco.setNumeroResidencia(numeroRes);
 
             System.out.print("CPF: ");
             Scanner cpf = new Scanner(System.in);
@@ -174,6 +193,8 @@ public class App {
             String senhaResponsavel = senha.nextLine();
             responsavel.setSenha(senhaResponsavel);
 
+            responsavel.setEndereco(endereco);
+
             listaResponsavel.add(responsavel);
 
             System.out.println("Você possuí " + listaResponsavel.size() + "Responsavel(s). Deseja continuar (S/N)? ");
@@ -189,8 +210,8 @@ public class App {
     public static void ConsultarResponsavel(List<Responsavel> listaResponsavel) {
         for (Responsavel responsavel2 : listaResponsavel) {
             System.out.println("Nome: " + responsavel2.getNome() + "\nRegistro: " + responsavel2.getRegistro()
-                    + "\nEndereco: " + "\nCPF: " + responsavel2.getCpf() + "\nRG: " + responsavel2.getRg() + "Senha: "
-                    + responsavel2.getSenha());
+                    + "\nEndereco: " + responsavel2.getEndereco() + "\nCPF: " + responsavel2.getCpf()
+                    + "\nRG: " + responsavel2.getRg() + "Senha: " + responsavel2.getSenha());
         }
     }
 
@@ -277,6 +298,7 @@ public class App {
         Login loginGeral = new Login();
         List<Demanda> listaDemanda = new ArrayList<>();
         List<Responsavel> listaResponsavel = new ArrayList<>();
+        
 
         int opcao = 0;
         do {
@@ -323,8 +345,7 @@ public class App {
                             || ((loginGeral.getRegistro().equals("usuario"))
                                     && (loginGeral.getSenha().equals("1234567")))) {
 
-                    }
-                    else {
+                    } else {
                         System.out.println("Login invalido");
                     }
                 }
