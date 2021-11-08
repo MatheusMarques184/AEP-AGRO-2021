@@ -127,9 +127,15 @@ public class App {
             Scanner nomeDemanda = new Scanner(System.in);
             String dem = nomeDemanda.nextLine();
             demanda.setDemanda(dem);
+
+            System.out.println("Informe quantidade: ");
+            Scanner quantidade = new Scanner(System.in);
+            String qDemanda = quantidade.nextLine();
+            demanda.setqDemanda(qDemanda);
+
             list.add(demanda);
 
-            System.out.println("Você possuí " + list.size() + "Demanda. Deseja continuar (S/N)? ");
+            System.out.println("Você possuí " + list.size() + " Demanda. Deseja continuar (S/N)? ");
             Scanner continuarDemanda = new Scanner(System.in);
             String continuar = continuarDemanda.nextLine();
             if (continuar.equalsIgnoreCase("N")) {
@@ -140,7 +146,7 @@ public class App {
 
     public static void ConsultarDemanda(List<Demanda> list) {
         for (Demanda demanda2 : list) {
-            System.out.println("Demanda: " + demanda2.getDemanda());
+            System.out.println("Demanda: " + demanda2.getDemanda() + "\nQuantidade: " + demanda2.getqDemanda());
         }
     }
 
@@ -210,12 +216,27 @@ public class App {
     public static void ConsultarResponsavel(List<Responsavel> listaResponsavel) {
         for (Responsavel responsavel2 : listaResponsavel) {
             System.out.println("Nome: " + responsavel2.getNome() + "\nRegistro: " + responsavel2.getRegistro()
-                    + "\nEndereco: " + responsavel2.getEndereco() + "\nCPF: " + responsavel2.getCpf()
-                    + "\nRG: " + responsavel2.getRg() + "Senha: " + responsavel2.getSenha());
+                    + "\nEndereco: " + responsavel2.getEndereco() + "\nCPF: " + responsavel2.getCpf() + "\nRG: "
+                    + responsavel2.getRg() + "\nSenha: " + responsavel2.getSenha());
         }
     }
 
-    public static void ExcluirResponsavel(List<Responsavel> listaResponsavel) {
+    public static void ExcluirResponsavel(List<Responsavel> listaResponsavel, Scanner menu) {
+        for (Responsavel responsavel : listaResponsavel) {
+            System.out.println("\nResponsaveis: " + responsavel.getNome());
+        }
+
+        for (int i = 0; i < listaResponsavel.size(); i++) {
+            System.out.print("Nome: ");
+            Scanner nome = new Scanner(System.in);
+            String nomeRes = nome.nextLine();
+            Responsavel r = listaResponsavel.get(i);
+            if (r.getNome().equals(nomeRes)) {
+                listaResponsavel.remove(r);
+                break;
+            }
+        }
+        System.out.println("Removido");
 
     }
 
@@ -251,7 +272,7 @@ public class App {
             case 4:
                 // editar Responsavel
             case 5:
-                ExcluirResponsavel(listaResponsavel);// terminar
+                ExcluirResponsavel(listaResponsavel, menu);
                 break;
             case 6:
 
@@ -298,7 +319,6 @@ public class App {
         Login loginGeral = new Login();
         List<Demanda> listaDemanda = new ArrayList<>();
         List<Responsavel> listaResponsavel = new ArrayList<>();
-        
 
         int opcao = 0;
         do {
