@@ -1,30 +1,12 @@
 package Sistema;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
 
 public class App {
-    public static void ImprimirProdutor(Produtor p) {
 
-        System.out.println("\nProdutor: " + p.getNome());
-        System.out.println("CPF " + p.getCpf() + " - Celular " + p.getNumeroCelular() + " - Data nascimento "
-                + p.getData() + " - Email " + p.getEmail());
-    }
-
-    public static void ImprimirCooperativa(Cooperativa c) {
-        System.out.println("\nCooperativa: " + c.getNomeCooperativa());
-        System.out.println("CNPJ " + c.getCNPJ());
-    }
-
-    /*
-     * public static void ImprimirResposavel(LoginResponsavel r) {
-     * System.out.println("\nRegistro Responsavel: " + r.getRegistro()); }
-     */
-
-    // ----------------------------------------------------------------------------------
     public static void RealizarCadastroProdutor(Produtor cadastro, Scanner menu) {
         System.out.print("Nome produtor: ");
         Scanner nome = new Scanner(System.in);
@@ -55,6 +37,8 @@ public class App {
         Scanner num = new Scanner(System.in);
         String numProdutor = num.nextLine();
         cadastro.setNumeroCelular(numProdutor);
+
+        System.out.print("\nCadastro realizado com sucesso\n");
     }
 
     public static void RealizarCadastroCooperativa(Cooperativa cadastro, Scanner menu) {
@@ -73,10 +57,34 @@ public class App {
         String cnpjCooperativa = cnpj.nextLine();
         cadastro.setCNPJ(cnpjCooperativa);
 
+        System.out.print("\nCadastro realizado com sucesso\n");
+
+    }
+
+    public static void RealizarLoginResponsavel(Login loginGeral, List<Responsavel> listaResponsavel) {
+        System.out.print("Registro responsavel: ");
+        Scanner registroResponsavel = new Scanner(System.in);
+        String rResponsavel = registroResponsavel.nextLine();
+        loginGeral.setRegistro(rResponsavel);
+        System.out.print("Senha: ");
+        Scanner senhaResponsavel = new Scanner(System.in);
+        String sResponsavel = senhaResponsavel.nextLine();
+        loginGeral.setSenha(sResponsavel);
+        for (int i = 0; i < listaResponsavel.size(); i++) {
+            if ((loginGeral.getRegistro().equals(listaResponsavel.get(i).getRegistro()))
+                    && ((loginGeral.getSenha().equals(listaResponsavel.get(i).getSenha())))
+                    || ((loginGeral.getRegistro().equals("usuario")) && (loginGeral.getSenha().equals("1234567")))) {
+
+            } else {
+                System.out.println("Login invalido");
+            }
+        }
+
+        System.out.print("\nLogin realizado com sucesso\n");
     }
 
     public static void RealizarLoginProdutor(Produtor cadastro, Scanner menu, Login loginGeral, List<Demanda> list,
-            List<Responsavel> listaResponsavel) {
+            List<Responsavel> listaResponsavel, List<Lote> listaLote) {
         System.out.println(" LOGIN ");
         System.out.print("Nome produtor: ");
         Scanner nome = new Scanner(System.in);
@@ -90,7 +98,7 @@ public class App {
         if ((loginGeral.getNome().equals(cadastro.getNome()) && (loginGeral.getSenha().equals(cadastro.getSenha())))
                 || (loginGeral.getNome().equals("usuario")) && (loginGeral.getSenha().equals("1234567"))) {
             System.out.println("Login valido");
-            MenuLogin(menu, list, listaResponsavel);
+            MenuLogin(menu, list, listaResponsavel, listaLote);
 
         } else {
             System.out.println("Login invalido");
@@ -216,8 +224,11 @@ public class App {
     public static void ConsultarResponsavel(List<Responsavel> listaResponsavel) {
         for (Responsavel responsavel2 : listaResponsavel) {
             System.out.println("Nome: " + responsavel2.getNome() + "\nRegistro: " + responsavel2.getRegistro()
-                    + "\nEndereco: " + responsavel2.getEndereco() + "\nCPF: " + responsavel2.getCpf() + "\nRG: "
-                    + responsavel2.getRg() + "\nSenha: " + responsavel2.getSenha());
+                    + "\nCep: " + responsavel2.getEndereco().getCep() + "\nNumero Residencia: "
+                    + responsavel2.getEndereco().getNumeroResidencia() + "\nBairro: "
+                    + responsavel2.getEndereco().getBairro() + "\nRua: " + responsavel2.getEndereco().getRua()
+                    + "\nCPF: " + responsavel2.getCpf() + "\nRG: " + responsavel2.getRg() + "\nSenha: "
+                    + responsavel2.getSenha());
         }
     }
 
@@ -240,7 +251,111 @@ public class App {
 
     }
 
-    public static void MenuLogin(Scanner menu, List<Demanda> list, List<Responsavel> listaResponsavel) {
+    private static void CadastrarLote(List<Lote> listaLote) { // adubar uma vez ao mes
+        while (true) {
+            Lote lote = new Lote();
+            Cultura cultura = new Cultura();
+            Adubo adubo = new Adubo();
+
+            Random random = new Random();
+            int numero = random.nextInt() * 100;
+
+            System.out.println("Id Lote: " + numero);
+            lote.setIdLote(numero);
+
+            // lote
+            System.out.print("Resgistro de Responsavel pelo Lote: ");
+            Scanner registro = new Scanner(System.in);
+            String resgistroResponsavel = registro.nextLine();
+            lote.setRegistroResponsavel(resgistroResponsavel);
+
+            System.out.print("Hectares do lote: ");
+            Scanner hectar = new Scanner(System.in);
+            String hectarLote = hectar.nextLine();
+            lote.setHectare(hectarLote);
+
+            // cultura
+            System.out.print("Tipo Cultura: "); // milho
+            Scanner tipo = new Scanner(System.in);
+            String tipoCultura = tipo.nextLine();
+            cultura.setTipoCultura(tipoCultura);
+
+            System.out.print("Ciclo de plantio: "); // 3 meses ou dias
+            Scanner ciclo = new Scanner(System.in);
+            String cicloCultura = ciclo.nextLine();
+            cultura.setCicloPlantio(cicloCultura);
+
+            System.out.print("Descanso do solo: ");
+            Scanner descanso = new Scanner(System.in);
+            String descansoSolo = descanso.nextLine();
+            cultura.setDescansoPosPlantio(descansoSolo);
+
+            // adubo
+            System.out.print("Marca do Adubo: ");
+            Scanner marca = new Scanner(System.in);
+            String marcaAdubo = marca.nextLine();
+            adubo.setMarcaAdubo(marcaAdubo);
+
+            System.out.print("Tipo do Adubo: ");
+            Scanner tipoA = new Scanner(System.in);
+            String tipoAdubo = tipoA.nextLine();
+            adubo.setTipoAdubo(tipoAdubo);
+
+            System.out.print("Duração do Adubo: ");
+            Scanner duracao = new Scanner(System.in);
+            String duracaoAdubo = duracao.nextLine();
+            adubo.setDuracaoAdubo(duracaoAdubo);
+
+            // cnpj cooperativa
+
+            cultura.setAdubo(adubo);
+            lote.setCultura(cultura);
+            listaLote.add(lote);
+
+            System.out.println("Você possuí " + listaLote.size() + "Lote(s). Deseja continuar (S/N)? ");
+            Scanner continuarDemanda = new Scanner(System.in);
+            String continuar = continuarDemanda.nextLine();
+            if (continuar.equalsIgnoreCase("N")) {
+                break;
+            }
+        }
+
+    }
+
+    public static void ConsultarLote(List<Lote> listaLote) { // fazer gerenciamento do adubo junto ao ciclo de plantio e
+                                                             // o tamanho da plantação
+        for (Lote lote : listaLote) {
+            System.out.println("Id-Lote: " + lote.getIdLote() + "\nRegistro responsavel por Lote: "
+                    + lote.getRegistroResponsavel() + "\nTamanho do Lote em hectar: " + lote.getHectare()
+                    + "\nCultura: " + lote.getCultura().getTipoCultura() + "\nCiclo plantio: "
+                    + lote.getCultura().getCicloPlantio() + "\nTempo de descanso do solo pos plantio: "
+                    + lote.getCultura().getDescansoPosPlantio() + "\nMarca adubo utilizado: "
+                    + lote.getCultura().getAdubo().getMarcaAdubo() + "\nTipo adubo: "
+                    + lote.getCultura().getAdubo().getTipoAdubo() + "\nDuração adubo: "
+                    + lote.getCultura().getAdubo().getDuracaoAdubo());
+        }
+    }
+
+    public static void ExcluirLote(List<Lote> listaLote) {
+        for (Lote lote : listaLote) {
+            System.out.println("Id-Lote: " + lote.getIdLote() + "\n");
+        }
+        for (int i = 0; i < listaLote.size(); i++) {
+            System.out.print("Id-Lote: ");
+            Scanner id = new Scanner(System.in);
+            String idLote = id.nextLine();
+            int idLoteInteiro = Integer.parseInt(idLote);
+            Lote l = listaLote.get(i);
+            if (l.getIdLote() == idLoteInteiro) {
+                listaLote.remove(l);
+                break;
+            }
+        }
+        System.out.println("Removido");
+    }
+
+    public static void MenuLogin(Scanner menu, List<Demanda> list, List<Responsavel> listaResponsavel,
+            List<Lote> listaLote) {
         int opcao = 0;
         do {
             System.out.print("##--         Menu         --##\n\n");
@@ -275,15 +390,17 @@ public class App {
                 ExcluirResponsavel(listaResponsavel, menu);
                 break;
             case 6:
-
+                CadastrarLote(listaLote);
+                break;
             case 7:
-
+                ConsultarLote(listaLote);
+                break;
             case 8:
-
+                // editar Lote
             case 9:
-
+                ExcluirLote(listaLote);
+                break;
             case 10:
-                // menu.close();
                 break;
             }
         } while (opcao != 10);
@@ -319,6 +436,7 @@ public class App {
         Login loginGeral = new Login();
         List<Demanda> listaDemanda = new ArrayList<>();
         List<Responsavel> listaResponsavel = new ArrayList<>();
+        List<Lote> listaLote = new ArrayList<>();
 
         int opcao = 0;
         do {
@@ -338,51 +456,27 @@ public class App {
             switch (opcao) {
             case 1:
                 RealizarCadastroProdutor(cadastroP, menu);
-                ImprimirProdutor(cadastroP);
-
-                System.out.print("\nCadastro realizado com sucesso\n");
                 break;
 
             case 2:
-
                 RealizarCadastroCooperativa(cadastroC, menu);
-                ImprimirCooperativa(cadastroC);
-                System.out.print("\nCadastro realizado com sucesso\n");
-
                 break;
             case 3:
-                System.out.print("Registro responsavel: ");
-                Scanner registroResponsavel = new Scanner(System.in);
-                String rResponsavel = registroResponsavel.nextLine();
-                loginGeral.setRegistro(rResponsavel);
-                System.out.print("Senha: ");
-                Scanner senhaResponsavel = new Scanner(System.in);
-                String sResponsavel = senhaResponsavel.nextLine();
-                loginGeral.setSenha(sResponsavel);
-                for (int i = 0; i < listaResponsavel.size(); i++) {
-                    if ((loginGeral.getRegistro().equals(listaResponsavel.get(i).getRegistro()))
-                            && ((loginGeral.getSenha().equals(listaResponsavel.get(i).getSenha())))
-                            || ((loginGeral.getRegistro().equals("usuario"))
-                                    && (loginGeral.getSenha().equals("1234567")))) {
-
-                    } else {
-                        System.out.println("Login invalido");
-                    }
-                }
-
-                System.out.print("\nLogin realizado com sucesso\n");
-                // ImprimirResposavel(loginR);
+                RealizarLoginResponsavel(loginGeral, listaResponsavel);
                 break;
 
             case 4:
-                RealizarLoginProdutor(cadastroP, menu, loginGeral, listaDemanda, listaResponsavel);
+                RealizarLoginProdutor(cadastroP, menu, loginGeral, listaDemanda, listaResponsavel, listaLote);
                 break;
+
             case 5:
                 RealizarLoginCooperativa(cadastroC, menu, loginGeral, listaDemanda);
                 break;
+
             case 6:
                 menu.close();
                 break;
+
             default:
                 System.out.print("\nOpção Inválida!");
                 break;
