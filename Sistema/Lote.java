@@ -5,16 +5,12 @@ public class Lote {
     private Cultura cultura;
     private String hectare;
     private String registroResponsavel;
-    private String cnpjCooperativa;
 
     public Cultura getCultura() {
         return cultura;
     }
     public int getIdLote() {
         return idLote;
-    }
-    public String getCnpjCooperativa() {
-        return cnpjCooperativa;
     }
     public String getHectare() {
         return hectare;
@@ -28,9 +24,6 @@ public class Lote {
     public void setIdLote(int idLote) {
         this.idLote = idLote;
     }
-    public void setCnpjCooperativa(String cnpjCooperativa) {
-        this.cnpjCooperativa = cnpjCooperativa;
-    }
     public void setHectare(String hectare) {
         this.hectare = hectare;
     }
@@ -38,8 +31,8 @@ public class Lote {
         this.registroResponsavel = registroResponsavel;
     }
 
-    public int calcularAduboAplicadoPorLinha() {
-       int qAplicadaPorMetroDeLInha =  (cultura.getEspacamentoSulgo() * cultura.getAdubo().getQuantidadeAduboPorHectar()) / 10;
+    public double calcularAduboAplicadoPorLinha() {
+       double qAplicadaPorMetroDeLInha =  (cultura.getEspacamentoSulgo() * cultura.getAdubo().getQuantidadeAduboPorHectar()) / 10.0;
        return qAplicadaPorMetroDeLInha;
     }
     

@@ -13,7 +13,7 @@ public class App {
         String nomeProdutor = nome.nextLine();
         cadastro.setNome(nomeProdutor);
 
-        System.out.print("Cpf: ");
+        System.out.print("Cpf: "); // int
         Scanner cpf = new Scanner(System.in);
         String cpfProdutor = cpf.nextLine();
         cadastro.setCpf(cpfProdutor);
@@ -23,7 +23,7 @@ public class App {
         String dataProdutor = data.nextLine();
         cadastro.setData(dataProdutor);
 
-        System.out.print("Senha: ");
+        System.out.print("Senha: "); // int
         Scanner senha = new Scanner(System.in);
         String senhaProdutor = senha.nextLine();
         cadastro.setSenha(senhaProdutor);
@@ -33,7 +33,7 @@ public class App {
         String emailProdutor = email.nextLine();
         cadastro.setEmail(emailProdutor);
 
-        System.out.print("Numero de telefone: ");
+        System.out.print("Numero de telefone: "); // int
         Scanner num = new Scanner(System.in);
         String numProdutor = num.nextLine();
         cadastro.setNumeroCelular(numProdutor);
@@ -55,6 +55,7 @@ public class App {
         System.out.print("CNPJ: ");
         Scanner cnpj = new Scanner(System.in);
         String cnpjCooperativa = cnpj.nextLine();
+        // int cnpjCooperativaInteiro = Integer.parseInt(cnpjCooperativa);
         cadastro.setCNPJ(cnpjCooperativa);
 
         System.out.print("\nCadastro realizado com sucesso\n");
@@ -233,6 +234,10 @@ public class App {
 
     }
 
+    public static void EditarResponsavel(List<Responsavel> listaResponsavel) {
+        System.out.println("Nada aqui");
+    }
+
     public static void ExcluirResponsavel(List<Responsavel> listaResponsavel, Scanner menu) {
         for (Responsavel responsavel : listaResponsavel) {
             System.out.println("\nResponsaveis: " + responsavel.getNome());
@@ -252,11 +257,12 @@ public class App {
 
     }
 
-    private static void CadastrarLote(List<Lote> listaLote) { // adubar uma vez ao mes
+    private static void CadastrarLote(List<Lote> listaLote) {
         while (true) {
             Lote lote = new Lote();
             Cultura cultura = new Cultura();
             Adubo adubo = new Adubo();
+            Agrotoxico agrotoxico = new Agrotoxico();
 
             Random random = new Random();
             int numero = random.nextInt() * 100;
@@ -270,7 +276,7 @@ public class App {
             String resgistroResponsavel = registro.nextLine();
             lote.setRegistroResponsavel(resgistroResponsavel);
 
-            System.out.print("Hectares do lote: ");
+            System.out.print("Tamanho do lote em hectar: ");
             Scanner hectar = new Scanner(System.in);
             String hectarLote = hectar.nextLine();
             lote.setHectare(hectarLote);
@@ -294,9 +300,8 @@ public class App {
             System.out.print("Espaçamento dos sulgos em metros: ");
             Scanner espacamento = new Scanner(System.in);
             String espacamentoSulgo = espacamento.nextLine();
-            int espacamentoSulgoInteiro = Integer.parseInt(espacamentoSulgo);
+            double espacamentoSulgoInteiro = Double.parseDouble(espacamentoSulgo);
             cultura.setEspacamentoSulgo(espacamentoSulgoInteiro);
-
 
             // adubo
             System.out.print("Marca do Adubo: ");
@@ -317,13 +322,27 @@ public class App {
             System.out.print("Quantidade de Adubo por Hectar: ");
             Scanner quantAdubo = new Scanner(System.in);
             String quantAduboHectar = quantAdubo.nextLine();
-            int quantAduboHectarInteiro = Integer.parseInt(quantAduboHectar);
+            double quantAduboHectarInteiro = Double.parseDouble(quantAduboHectar);
             adubo.setQuantidadeAduboPorHectar(quantAduboHectarInteiro);
 
+            System.out.print("Tipo do agrotoxico: ");
+            Scanner tipoAgro = new Scanner(System.in);
+            String tipoAgrotoxico = tipoAgro.nextLine();
+            agrotoxico.setTipoAgrotoxico(tipoAgrotoxico);
 
+            System.out.print("Vazão do pulverisador em L/min: ");
+            Scanner vazao = new Scanner(System.in);
+            String vazaoPulverizador = vazao.nextLine();
+            double vazaoPulverizadorReal = Double.parseDouble(vazaoPulverizador);
+            agrotoxico.setVazaoPulverizador(vazaoPulverizadorReal);
 
-            // cnpj cooperativa
+            System.out.print("Tempo para pulverisar em min/ha: ");
+            Scanner tempoPulverizar = new Scanner(System.in);
+            String tempoPulverizarString = tempoPulverizar.nextLine();
+            double tempoParaPulverizar = Double.parseDouble(tempoPulverizarString);
+            agrotoxico.setTempoParaPulverizar(tempoParaPulverizar);
 
+            cultura.setAgrotoxico(agrotoxico);
             cultura.setAdubo(adubo);
             lote.setCultura(cultura);
             listaLote.add(lote);
@@ -337,7 +356,13 @@ public class App {
         }
 
     }
-//antes plantar semente tem que adubar
+
+    // antes plantar semente tem que adubar
+    /*
+     * Volume de calda gasto será obtido multiplicando-se a vazão do pulverizador
+     * (15,38 litros/min) pelo tempo que se gasta para a pulverização (9,52 min/ha).
+     * Volume consumido/ha = 15,38x9,52 = 146,46 litros/ha.
+     */
     public static void ConsultarLote(List<Lote> listaLote) { // fazer gerenciamento do adubo junto ao ciclo de plantio e
                                                              // o tamanho da plantação -> preguiça
         for (Lote lote : listaLote) {
@@ -348,10 +373,19 @@ public class App {
                     + lote.getCultura().getDescansoPosPlantio() + "\nMarca adubo utilizado: "
                     + lote.getCultura().getAdubo().getMarcaAdubo() + "\nTipo adubo: "
                     + lote.getCultura().getAdubo().getTipoAdubo() + "\nDuração adubo: "
-                    + lote.getCultura().getAdubo().getDuracaoAdubo());
-                   System.out.println(" Quantidade de adubo aplicado por Linha: " + lote.calcularAduboAplicadoPorLinha());
+                    + lote.getCultura().getAdubo().getDuracaoAdubo() + "\nTipo Agrotoxico: "
+                    + lote.getCultura().getAgrotoxico().getTipoAgrotoxico() + "\nVazão do pulverisador em L/min: "
+                    + lote.getCultura().getAgrotoxico().getVazaoPulverizador() + "\nTempo para pulverisar em min/ha: "
+                    + lote.getCultura().getAgrotoxico().getTempoParaPulverizar());
+            System.out.println(" Quantidade de adubo aplicado por linha: " + lote.calcularAduboAplicadoPorLinha());
+            System.out.println("Dosagem do agrotoxico por hectar: "
+                    + lote.getCultura().getAgrotoxico().CalculaVolumeDosagemAgrotoxico());
         }
-        
+
+    }
+
+    public static void EditarLote(List<Lote> listaLote) {
+
     }
 
     public static void ExcluirLote(List<Lote> listaLote) {
@@ -403,7 +437,7 @@ public class App {
                 ConsultarResponsavel(listaResponsavel);
                 break;
             case 4:
-                // editar Responsavel
+                EditarResponsavel(listaResponsavel);
             case 5:
                 ExcluirResponsavel(listaResponsavel, menu);
                 break;
@@ -414,7 +448,7 @@ public class App {
                 ConsultarLote(listaLote);
                 break;
             case 8:
-                // editar Lote
+                EditarLote(listaLote);
             case 9:
                 ExcluirLote(listaLote);
                 break;
