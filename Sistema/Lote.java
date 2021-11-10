@@ -37,5 +37,10 @@ public class Lote {
     public void setRegistroResponsavel(String registroResponsavel) {
         this.registroResponsavel = registroResponsavel;
     }
+
+    public int calcularAduboAplicadoPorLinha() {
+       int qAplicadaPorMetroDeLInha =  (cultura.getEspacamentoSulgo() * cultura.getAdubo().getQuantidadeAduboPorHectar()) / 10;
+       return qAplicadaPorMetroDeLInha;
+    }
     
 }

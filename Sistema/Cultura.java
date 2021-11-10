@@ -4,6 +4,7 @@ public class Cultura {
     private String tipoCultura;
     private String cicloPlantio;
     private Adubo adubo;
+    private int espacamentoSulgo;
     private String descansoPosPlantio;
 
     public Adubo getAdubo() {
@@ -18,6 +19,9 @@ public class Cultura {
     public String getDescansoPosPlantio() {
         return descansoPosPlantio;
     }
+    public int getEspacamentoSulgo() {
+        return espacamentoSulgo;
+    }
 
     public void setAdubo(Adubo adubo) {
         this.adubo = adubo;
@@ -30,5 +34,8 @@ public class Cultura {
     }
     public void setDescansoPosPlantio(String descansoPosPlantio) {
         this.descansoPosPlantio = descansoPosPlantio;
+    }
+    public void setEspacamentoSulgo(int espacamentoSulgo) {
+        this.espacamentoSulgo = espacamentoSulgo;
     }
 }

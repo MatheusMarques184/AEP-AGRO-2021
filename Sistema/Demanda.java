@@ -1,8 +1,5 @@
 package Sistema;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Demanda {
     private String demanda;
     private String qDemanda;

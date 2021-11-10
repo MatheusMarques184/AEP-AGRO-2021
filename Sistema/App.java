@@ -230,6 +230,7 @@ public class App {
                     + "\nCPF: " + responsavel2.getCpf() + "\nRG: " + responsavel2.getRg() + "\nSenha: "
                     + responsavel2.getSenha());
         }
+
     }
 
     public static void ExcluirResponsavel(List<Responsavel> listaResponsavel, Scanner menu) {
@@ -280,15 +281,22 @@ public class App {
             String tipoCultura = tipo.nextLine();
             cultura.setTipoCultura(tipoCultura);
 
-            System.out.print("Ciclo de plantio: "); // 3 meses ou dias
+            System.out.print("Ciclo de plantio em meses: "); // 3 meses ou dias
             Scanner ciclo = new Scanner(System.in);
             String cicloCultura = ciclo.nextLine();
             cultura.setCicloPlantio(cicloCultura);
 
-            System.out.print("Descanso do solo: ");
+            System.out.print("Tempo de descanso do solo: ");
             Scanner descanso = new Scanner(System.in);
             String descansoSolo = descanso.nextLine();
             cultura.setDescansoPosPlantio(descansoSolo);
+
+            System.out.print("Espaçamento dos sulgos em metros: ");
+            Scanner espacamento = new Scanner(System.in);
+            String espacamentoSulgo = espacamento.nextLine();
+            int espacamentoSulgoInteiro = Integer.parseInt(espacamentoSulgo);
+            cultura.setEspacamentoSulgo(espacamentoSulgoInteiro);
+
 
             // adubo
             System.out.print("Marca do Adubo: ");
@@ -306,6 +314,14 @@ public class App {
             String duracaoAdubo = duracao.nextLine();
             adubo.setDuracaoAdubo(duracaoAdubo);
 
+            System.out.print("Quantidade de Adubo por Hectar: ");
+            Scanner quantAdubo = new Scanner(System.in);
+            String quantAduboHectar = quantAdubo.nextLine();
+            int quantAduboHectarInteiro = Integer.parseInt(quantAduboHectar);
+            adubo.setQuantidadeAduboPorHectar(quantAduboHectarInteiro);
+
+
+
             // cnpj cooperativa
 
             cultura.setAdubo(adubo);
@@ -321,9 +337,9 @@ public class App {
         }
 
     }
-
+//antes plantar semente tem que adubar
     public static void ConsultarLote(List<Lote> listaLote) { // fazer gerenciamento do adubo junto ao ciclo de plantio e
-                                                             // o tamanho da plantação
+                                                             // o tamanho da plantação -> preguiça
         for (Lote lote : listaLote) {
             System.out.println("Id-Lote: " + lote.getIdLote() + "\nRegistro responsavel por Lote: "
                     + lote.getRegistroResponsavel() + "\nTamanho do Lote em hectar: " + lote.getHectare()
@@ -333,7 +349,9 @@ public class App {
                     + lote.getCultura().getAdubo().getMarcaAdubo() + "\nTipo adubo: "
                     + lote.getCultura().getAdubo().getTipoAdubo() + "\nDuração adubo: "
                     + lote.getCultura().getAdubo().getDuracaoAdubo());
+                   System.out.println(" Quantidade de adubo aplicado por Linha: " + lote.calcularAduboAplicadoPorLinha());
         }
+        
     }
 
     public static void ExcluirLote(List<Lote> listaLote) {
