@@ -19,15 +19,25 @@ public class Lote {
         return registroResponsavel;
     }
     public void setCultura(Cultura cultura) {
+        if(cultura == null) {
+            throw new RuntimeException("Cultura não pode ser nula");
+        }
         this.cultura = cultura;
     }
     public void setIdLote(int idLote) {
+
         this.idLote = idLote;
     }
     public void setHectare(String hectare) {
+        if(hectare == null) {
+            throw new RuntimeException("não pode ser nulo");
+        }
         this.hectare = hectare;
     }
     public void setRegistroResponsavel(String registroResponsavel) {
+        if(registroResponsavel == null) {
+            throw new RuntimeException("Registro não pode ser nulo");
+        }
         this.registroResponsavel = registroResponsavel;
     }
 

@@ -20,15 +20,27 @@ public class Endereco {
         return rua;
     }
     public void setBairro(String bairro) {
+        if(bairro == null) {
+            throw new RuntimeException("Bairro não pode ser nulo");
+        }
         this.bairro = bairro;
     }
     public void setCep(String cep) {
+        if(cep == null) {
+            throw new RuntimeException("CEP não pode ner nulo");
+        }
         this.cep = cep;
     }
     public void setNumeroResidencia(String numeroResidencia) {
+        if(numeroResidencia == null) {
+            throw new RuntimeException("Numero da residêcia não pode ser nula");
+        }
         this.numeroResidencia = numeroResidencia;
     }
     public void setRua(String rua) {
+        if(rua == null) {
+            throw new RuntimeException("Rua não pode ser nula");
+        }
         this.rua = rua;
     }
     

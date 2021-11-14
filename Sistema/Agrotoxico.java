@@ -18,14 +18,23 @@ public class Agrotoxico {
     }
 
     public void setTempoParaPulverizar(double tempoParaPulverizar) {
+        if(tempoParaPulverizar <= 0) {
+            throw new RuntimeException("Tempo não pode ser 0 ou negativo");
+        }
         this.tempoParaPulverizar = tempoParaPulverizar;
     }
 
     public void setTipoAgrotoxico(String tipoAgrotoxico) {
+        if(tipoAgrotoxico == null) {
+            throw new RuntimeException("Tipo do Agrotoxico não pode ser nulo");
+        }
         this.tipoAgrotoxico = tipoAgrotoxico;
     }
 
     public void setVazaoPulverizador(double vazaoPulverizador) {
+        if(vazaoPulverizador <= 0) {
+            throw new RuntimeException("Vazão não pode ser 0 ou negativo");
+        }
         this.vazaoPulverizador = vazaoPulverizador;
     }
 

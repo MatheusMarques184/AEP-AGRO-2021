@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static void RealizarCadastroProdutor(Produtor cadastro, Scanner menu) {
+    public static void RealizarCadastroProdutor(Produtor cadastro) {
         System.out.print("Nome produtor: ");
         Scanner nome = new Scanner(System.in);
         String nomeProdutor = nome.nextLine();
@@ -33,7 +33,7 @@ public class App {
         String emailProdutor = email.nextLine();
         cadastro.setEmail(emailProdutor);
 
-        System.out.print("Numero de telefone: "); // int
+        System.out.print("Numero de telefone: ");
         Scanner num = new Scanner(System.in);
         String numProdutor = num.nextLine();
         cadastro.setNumeroCelular(numProdutor);
@@ -41,7 +41,7 @@ public class App {
         System.out.print("\nCadastro realizado com sucesso\n");
     }
 
-    public static void RealizarCadastroCooperativa(Cooperativa cadastro, Scanner menu) {
+    public static void RealizarCadastroCooperativa(Cooperativa cadastro) {
         System.out.print("Nome Cooperativa: ");
         Scanner nome = new Scanner(System.in);
         String nomeCooperativa = nome.nextLine();
@@ -55,7 +55,6 @@ public class App {
         System.out.print("CNPJ: ");
         Scanner cnpj = new Scanner(System.in);
         String cnpjCooperativa = cnpj.nextLine();
-        // int cnpjCooperativaInteiro = Integer.parseInt(cnpjCooperativa);
         cadastro.setCNPJ(cnpjCooperativa);
 
         System.out.print("\nCadastro realizado com sucesso\n");
@@ -75,13 +74,12 @@ public class App {
             if ((loginGeral.getRegistro().equals(listaResponsavel.get(i).getRegistro()))
                     && ((loginGeral.getSenha().equals(listaResponsavel.get(i).getSenha())))
                     || ((loginGeral.getRegistro().equals("usuario")) && (loginGeral.getSenha().equals("1234567")))) {
-
+                System.out.print("\nLogin realizado com sucesso\n");
             } else {
                 System.out.println("Login invalido");
             }
         }
 
-        System.out.print("\nLogin realizado com sucesso\n");
     }
 
     public static void RealizarLoginProdutor(Produtor cadastro, Scanner menu, Login loginGeral, List<Demanda> list,
@@ -129,7 +127,7 @@ public class App {
         }
     }
 
-    public static void InformarDemanda(Scanner menu, List<Demanda> list) {
+    public static void InformarDemanda(List<Demanda> list) {
         while (true) {
             Demanda demanda = new Demanda();
             System.out.println("Informe demanda: ");
@@ -159,7 +157,7 @@ public class App {
         }
     }
 
-    public static void CadastrarResponsavel(Scanner menu, List<Responsavel> listaResponsavel) {
+    public static void CadastrarResponsavel(List<Responsavel> listaResponsavel) {
         while (true) {
             Responsavel responsavel = new Responsavel();
             Endereco endereco = new Endereco();
@@ -212,7 +210,7 @@ public class App {
 
             listaResponsavel.add(responsavel);
 
-            System.out.println("Você possuí " + listaResponsavel.size() + "Responsavel(s). Deseja continuar (S/N)? ");
+            System.out.println("Você possuí " + listaResponsavel.size() + " Responsavel(s). Deseja continuar (S/N)? ");
             Scanner continuarDemanda = new Scanner(System.in);
             String continuar = continuarDemanda.nextLine();
             if (continuar.equalsIgnoreCase("N")) {
@@ -234,11 +232,112 @@ public class App {
 
     }
 
-    public static void EditarResponsavel(List<Responsavel> listaResponsavel) {
-        System.out.println("Nada aqui");
+    public static void EditarResponsavel(List<Responsavel> listaResponsavel, Scanner menu) {
+        int op = -1;
+        for (int i = 0; i < listaResponsavel.size();) {
+            System.out.println("Opção " + i + "\nNome: " + listaResponsavel.get(i).getNome() + "\nRegistro: "
+                    + listaResponsavel.get(i).getRegistro());
+
+            System.out.println("Escolha responsavel para editar: ");
+            op = menu.nextInt();
+            if (op == i) {
+                System.out.println("ESCOLHA OS CAMPOS PARA EDITAR");
+                int opcao = 0;
+                do {
+                    System.out.print("##--      Editar Campos       --##\n\n");
+                    System.out.print("|--------------------------------|\n");
+                    System.out.print("| Opção 1 - Nome                 |\n");
+                    System.out.print("| Opção 2 - Registro             |\n");
+                    System.out.print("| Opção 3 - CEP                  |\n");
+                    System.out.print("| Opção 4 - Rua                  |\n");
+                    System.out.print("| Opção 5 - Bairro               |\n");
+                    System.out.print("| Opção 6 - Numero Residencia    |\n");
+                    System.out.print("| Opção 7 - CPF                  |\n");
+                    System.out.print("| Opção 8 - RG                   |\n");
+                    System.out.print("| Opção 9 - Senha                |\n");
+                    System.out.print("| Opção 10 - Sair                |\n");
+                    System.out.print("|--------------------------------|\n");
+                    System.out.print("Digite uma opção: ");
+                    opcao = menu.nextInt();
+
+                    switch (opcao) {
+                    case 1:
+                        System.out.print("Novo Nome: ");
+                        Scanner res = new Scanner(System.in);
+                        String nomeResponsavel = res.nextLine();
+                        listaResponsavel.get(op).setNome(nomeResponsavel);
+                        break;
+                    case 2:
+                        System.out.print("Novo Registro: ");
+                        Scanner registro = new Scanner(System.in);
+                        String registroResponsavel = registro.nextLine();
+                        listaResponsavel.get(op).setRegistro(registroResponsavel);
+                        break;
+
+                    case 3:
+                        System.out.print("Novo CEP: ");
+                        Scanner cep = new Scanner(System.in);
+                        String cepResponsavel = cep.nextLine();
+                        listaResponsavel.get(op).getEndereco().setCep(cepResponsavel);
+                        break;
+
+                    case 4:
+                        System.out.print("Nova Rua: ");
+                        Scanner rua = new Scanner(System.in);
+                        String ruaEndereco = rua.nextLine();
+                        listaResponsavel.get(op).getEndereco().setRua(ruaEndereco);
+                        break;
+
+                    case 5:
+                        System.out.print("Novo Bairro: ");
+                        Scanner bairro = new Scanner(System.in);
+                        String bairroEndereco = bairro.nextLine();
+                        listaResponsavel.get(op).getEndereco().setBairro(bairroEndereco);
+                        break;
+
+                    case 6:
+                        System.out.print("Novo numero Residencia: ");
+                        Scanner numero = new Scanner(System.in);
+                        String numeroRes = numero.nextLine();
+                        listaResponsavel.get(op).getEndereco().setNumeroResidencia(numeroRes);
+                        break;
+
+                    case 7:
+                        System.out.print("Novo CPF: ");
+                        Scanner cpf = new Scanner(System.in);
+                        String cpfResponsavel = cpf.nextLine();
+                        listaResponsavel.get(op).setCpf(cpfResponsavel);
+                        break;
+                    case 8:
+                        System.out.print("Novo RG: ");
+                        Scanner rg = new Scanner(System.in);
+                        String rgResponsavel = rg.nextLine();
+                        listaResponsavel.get(op).setRg(rgResponsavel);
+                        break;
+
+                    case 9:
+                        System.out.print("Nova Senha: ");
+                        Scanner senha = new Scanner(System.in);
+                        String senhaResponsavel = senha.nextLine();
+                        listaResponsavel.get(op).setSenha(senhaResponsavel);
+                        break;
+
+                    case 10:
+
+                        break;
+                    }
+                } while (opcao != 10);
+                break;
+            } else {
+                System.out.println("Responsavel não existe");
+                break;
+            }
+
+        }
+
     }
 
-    public static void ExcluirResponsavel(List<Responsavel> listaResponsavel, Scanner menu) {
+    public static void ExcluirResponsavel(List<Responsavel> listaResponsavel) {// fazer pelo nome
         for (Responsavel responsavel : listaResponsavel) {
             System.out.println("\nResponsaveis: " + responsavel.getNome());
         }
@@ -254,10 +353,9 @@ public class App {
             }
         }
         System.out.println("Removido");
-
     }
 
-    private static void CadastrarLote(List<Lote> listaLote) {
+    public static void CadastrarLote(List<Lote> listaLote) {
         while (true) {
             Lote lote = new Lote();
             Cultura cultura = new Cultura();
@@ -265,7 +363,7 @@ public class App {
             Agrotoxico agrotoxico = new Agrotoxico();
 
             Random random = new Random();
-            int numero = random.nextInt() * 100;
+            int numero = random.nextInt(100);
 
             System.out.println("Id Lote: " + numero);
             lote.setIdLote(numero);
@@ -276,18 +374,18 @@ public class App {
             String resgistroResponsavel = registro.nextLine();
             lote.setRegistroResponsavel(resgistroResponsavel);
 
-            System.out.print("Tamanho do lote em hectar: ");
+            System.out.print("Tamanho do lote em hectare: ");
             Scanner hectar = new Scanner(System.in);
             String hectarLote = hectar.nextLine();
             lote.setHectare(hectarLote);
 
             // cultura
-            System.out.print("Tipo Cultura: "); // milho
+            System.out.print("Tipo da Cultura: ");
             Scanner tipo = new Scanner(System.in);
             String tipoCultura = tipo.nextLine();
             cultura.setTipoCultura(tipoCultura);
 
-            System.out.print("Ciclo de plantio em meses: "); // 3 meses ou dias
+            System.out.print("Ciclo de plantio em meses: ");
             Scanner ciclo = new Scanner(System.in);
             String cicloCultura = ciclo.nextLine();
             cultura.setCicloPlantio(cicloCultura);
@@ -319,12 +417,13 @@ public class App {
             String duracaoAdubo = duracao.nextLine();
             adubo.setDuracaoAdubo(duracaoAdubo);
 
-            System.out.print("Quantidade de Adubo por Hectar: ");
+            System.out.print("Quantidade de Adubo por Hectare: ");
             Scanner quantAdubo = new Scanner(System.in);
             String quantAduboHectar = quantAdubo.nextLine();
             double quantAduboHectarInteiro = Double.parseDouble(quantAduboHectar);
             adubo.setQuantidadeAduboPorHectar(quantAduboHectarInteiro);
 
+            // agrotoxico
             System.out.print("Tipo do agrotoxico: ");
             Scanner tipoAgro = new Scanner(System.in);
             String tipoAgrotoxico = tipoAgro.nextLine();
@@ -347,7 +446,7 @@ public class App {
             lote.setCultura(cultura);
             listaLote.add(lote);
 
-            System.out.println("Você possuí " + listaLote.size() + "Lote(s). Deseja continuar (S/N)? ");
+            System.out.println("Você possuí " + listaLote.size() + " Lote(s). Deseja continuar (S/N)? ");
             Scanner continuarDemanda = new Scanner(System.in);
             String continuar = continuarDemanda.nextLine();
             if (continuar.equalsIgnoreCase("N")) {
@@ -363,11 +462,11 @@ public class App {
      * (15,38 litros/min) pelo tempo que se gasta para a pulverização (9,52 min/ha).
      * Volume consumido/ha = 15,38x9,52 = 146,46 litros/ha.
      */
-    public static void ConsultarLote(List<Lote> listaLote) { // fazer gerenciamento do adubo junto ao ciclo de plantio e
-                                                             // o tamanho da plantação -> preguiça
+    public static void ConsultarLote(List<Lote> listaLote) {
+
         for (Lote lote : listaLote) {
             System.out.println("Id-Lote: " + lote.getIdLote() + "\nRegistro responsavel por Lote: "
-                    + lote.getRegistroResponsavel() + "\nTamanho do Lote em hectar: " + lote.getHectare()
+                    + lote.getRegistroResponsavel() + "\nTamanho do Lote em hectare: " + lote.getHectare()
                     + "\nCultura: " + lote.getCultura().getTipoCultura() + "\nCiclo plantio: "
                     + lote.getCultura().getCicloPlantio() + "\nTempo de descanso do solo pos plantio: "
                     + lote.getCultura().getDescansoPosPlantio() + "\nMarca adubo utilizado: "
@@ -384,7 +483,145 @@ public class App {
 
     }
 
-    public static void EditarLote(List<Lote> listaLote) {
+    public static void EditarLote(List<Lote> listaLote, Scanner menu) {
+
+        int op = -1;
+        for (int i = 0; i < listaLote.size();) {
+            System.out.println("Opção " + i + "\nId-Lote: " + listaLote.get(i).getIdLote());
+            System.out.println("Escolha Lote para editar: ");
+            op = menu.nextInt();
+            if (op == i) {
+                System.out.println("ESCOLHA QUAIS CAMPOS DESEJA EDITAR");
+                int opcao = 0;
+                do {
+                    System.out.print("##--        Editar Campos       --##\n\n");
+                    System.out.print("|----------------------------------|\n");
+                    System.out.print("| Opção 1 -  Registro  Responsavel |\n");
+                    System.out.print("| Opção 2 -  Tamanho do lote       |\n");
+                    System.out.print("| Opção 3 -  Tipo da Cultura       |\n");
+                    System.out.print("| Opção 4 -  Ciclo plantio         |\n");
+                    System.out.print("| Opção 5 -  Descanso do solo      |\n");
+                    System.out.print("| Opção 6 -  Marca do adubo        |\n");
+                    System.out.print("| Opção 7 -  Tipo do adubo         |\n");
+                    System.out.print("| Opção 8 -  Espaçamento dos sulgos|\n");
+                    System.out.print("| Opção 9 -  Duração do Adubo      |\n");
+                    System.out.print("| Opção 10 - Quantidade de Adubo   |\n");
+                    System.out.print("| Opção 11 - Tipo do agrotoxico    |\n");
+                    System.out.print("| Opção 12 - Vazão do pulverisador |\n");
+                    System.out.print("| Opção 13 - Tempo para pulverisar |\n");
+                    System.out.print("|----------------------------------|\n");
+                    System.out.print("Digite uma opção: ");
+                    opcao = menu.nextInt();
+
+                    switch (opcao) {
+                    case 1:
+                        System.out.print("Novo Resgistro para Responsavel pelo Lote: ");
+                        Scanner registro = new Scanner(System.in);
+                        String registroResponsavel = registro.nextLine();
+                        listaLote.get(op).setRegistroResponsavel(registroResponsavel);
+                        break;
+
+                    case 2:
+                        System.out.print("Novo Tamanho do lote em hectare: ");
+                        Scanner hectar = new Scanner(System.in);
+                        String hectarLote = hectar.nextLine();
+                        listaLote.get(op).setHectare(hectarLote);
+                        break;
+
+                    case 3:
+                        System.out.print("Novo tipo para Cultura: ");
+                        Scanner tipo = new Scanner(System.in);
+                        String tipoCultura = tipo.nextLine();
+                        listaLote.get(op).getCultura().setTipoCultura(tipoCultura);
+                        break;
+
+                    case 4:
+                        System.out.print("Novo ciclo de plantio em meses: ");
+                        Scanner ciclo = new Scanner(System.in);
+                        String cicloCultura = ciclo.nextLine();
+                        listaLote.get(op).getCultura().setCicloPlantio(cicloCultura);
+                        break;
+
+                    case 5:
+                        System.out.print("Novo tempo de descanso do solo: ");
+                        Scanner descanso = new Scanner(System.in);
+                        String descansoSolo = descanso.nextLine();
+                        listaLote.get(op).getCultura().setDescansoPosPlantio(descansoSolo);
+                        break;
+
+                    case 6:
+                        System.out.print("Nova marca do Adubo: ");
+                        Scanner marca = new Scanner(System.in);
+                        String marcaAdubo = marca.nextLine();
+                        listaLote.get(op).getCultura().getAdubo().setMarcaAdubo(marcaAdubo);
+                        break;
+
+                    case 7:
+                        System.out.print("Novo tipo do Adubo: ");
+                        Scanner tipoA = new Scanner(System.in);
+                        String tipoAdubo = tipoA.nextLine();
+                        listaLote.get(op).getCultura().getAdubo().setTipoAdubo(tipoAdubo);
+                        break;
+
+                    case 8:
+                        System.out.print("Novo espaçamento dos sulgos em metros: ");
+                        Scanner espacamento = new Scanner(System.in);
+                        String espacamentoSulgo = espacamento.nextLine();
+                        double espacamentoSulgoInteiro = Double.parseDouble(espacamentoSulgo);
+                        listaLote.get(op).getCultura().setEspacamentoSulgo(espacamentoSulgoInteiro);
+                        break;
+
+                    case 9:
+                        System.out.print("Nova duração do Adubo: ");
+                        Scanner duracao = new Scanner(System.in);
+                        String duracaoAdubo = duracao.nextLine();
+                        listaLote.get(op).getCultura().getAdubo().setDuracaoAdubo(duracaoAdubo);
+                        break;
+
+                    case 10:
+                        System.out.print("Nova quantidade de Adubo por Hectare: ");
+                        Scanner quantAdubo = new Scanner(System.in);
+                        String quantAduboHectar = quantAdubo.nextLine();
+                        double quantAduboHectarInteiro = Double.parseDouble(quantAduboHectar);
+                        listaLote.get(op).getCultura().getAdubo().setQuantidadeAduboPorHectar(quantAduboHectarInteiro);
+                        break;
+
+                    case 11:
+                        System.out.print("Novo tipo do agrotoxico: ");
+                        Scanner tipoAgro = new Scanner(System.in);
+                        String tipoAgrotoxico = tipoAgro.nextLine();
+                        listaLote.get(op).getCultura().getAgrotoxico().setTipoAgrotoxico(tipoAgrotoxico);
+                        break;
+
+                    case 12:
+                        System.out.print("Nova vazão do pulverisador em L/min: ");
+                        Scanner vazao = new Scanner(System.in);
+                        String vazaoPulverizador = vazao.nextLine();
+                        double vazaoPulverizadorReal = Double.parseDouble(vazaoPulverizador);
+                        listaLote.get(op).getCultura().getAgrotoxico().setVazaoPulverizador(vazaoPulverizadorReal);
+                        break;
+
+                    case 13:
+                        System.out.print("Novo tempo para pulverisar em min/ha: ");
+                        Scanner tempoPulverizar = new Scanner(System.in);
+                        String tempoPulverizarString = tempoPulverizar.nextLine();
+                        double tempoParaPulverizar = Double.parseDouble(tempoPulverizarString);
+                        listaLote.get(op).getCultura().getAgrotoxico().setTempoParaPulverizar(tempoParaPulverizar);
+                        break;
+
+                    case 14:
+
+                        break;
+
+                    }
+                } while (opcao != 14);
+                break;
+            } else {
+                System.out.println("Lote não existe");
+                break;
+            }
+
+        }
 
     }
 
@@ -396,6 +633,7 @@ public class App {
             System.out.print("Id-Lote: ");
             Scanner id = new Scanner(System.in);
             String idLote = id.nextLine();
+
             int idLoteInteiro = Integer.parseInt(idLote);
             Lote l = listaLote.get(i);
             if (l.getIdLote() == idLoteInteiro) {
@@ -431,15 +669,16 @@ public class App {
                 ConsultarDemanda(list);
                 break;
             case 2:
-                CadastrarResponsavel(menu, listaResponsavel);
+                CadastrarResponsavel(listaResponsavel);
                 break;
             case 3:
                 ConsultarResponsavel(listaResponsavel);
                 break;
             case 4:
-                EditarResponsavel(listaResponsavel);
+                EditarResponsavel(listaResponsavel, menu);
+                break;
             case 5:
-                ExcluirResponsavel(listaResponsavel, menu);
+                ExcluirResponsavel(listaResponsavel);
                 break;
             case 6:
                 CadastrarLote(listaLote);
@@ -448,7 +687,8 @@ public class App {
                 ConsultarLote(listaLote);
                 break;
             case 8:
-                EditarLote(listaLote);
+                EditarLote(listaLote, menu);
+                break;
             case 9:
                 ExcluirLote(listaLote);
                 break;
@@ -471,7 +711,7 @@ public class App {
 
             switch (opcao) {
             case 1:
-                InformarDemanda(menu, list);
+                InformarDemanda(list);
                 break;
             case 2:
                 break;
@@ -507,11 +747,11 @@ public class App {
 
             switch (opcao) {
             case 1:
-                RealizarCadastroProdutor(cadastroP, menu);
+                RealizarCadastroProdutor(cadastroP);
                 break;
 
             case 2:
-                RealizarCadastroCooperativa(cadastroC, menu);
+                RealizarCadastroCooperativa(cadastroC);
                 break;
             case 3:
                 RealizarLoginResponsavel(loginGeral, listaResponsavel);

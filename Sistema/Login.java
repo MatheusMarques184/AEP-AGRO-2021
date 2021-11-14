@@ -21,9 +21,15 @@ public class Login {
         this.senha=senha;
     }
     public void setNome(String nome) {
+        if(nome == null) {
+            throw new RuntimeException("Nome não pode ser nulo");
+        }
         this.nome = nome;
     }
     public void setRegistro(String registro) {
+        if(registro == null) {
+            throw new  RuntimeException("Registro não pode ser nulo");
+        }
         this.registro = registro;
     }
 

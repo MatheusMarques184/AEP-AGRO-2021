@@ -19,12 +19,21 @@ public class Adubo {
         return quantidadeAduboPorHectar;
     }
     public void setDuracaoAdubo(String duracaoAdubo) {
+        if(duracaoAdubo == null) {
+            throw new RuntimeException("Duração não pode ser nula");
+        }
         this.duracaoAdubo = duracaoAdubo;
     }
     public void setMarcaAdubo(String marcaAdubo) {
+        if(marcaAdubo == null) {
+            throw new RuntimeException("Marca não pode ser nula");
+        }
         this.marcaAdubo = marcaAdubo;
     }
     public void setTipoAdubo(String tipoAdubo) {
+        if(tipoAdubo == null) {
+            throw new RuntimeException("Tipo adubo não pode ser nulo");
+        }
         this.tipoAdubo = tipoAdubo;
     }
     public void setQuantidadeAduboPorHectar(double quantidadeAduboPorHectar) {
