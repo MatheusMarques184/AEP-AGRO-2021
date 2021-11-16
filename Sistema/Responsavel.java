@@ -15,9 +15,7 @@ public class Responsavel {
     public String getSenha() {
         return senha;
     }
-
     
-
     public String getCpf() {
         return cpf;
     }
@@ -33,8 +31,9 @@ public class Responsavel {
     public String getRg() {
         return rg;
     }
+
     public void setRegistro(String registro) {
-        if(registro == null) {
+        if (registro == null) {
             throw new RuntimeException("Registro não pode ser nulo");
         }
         this.registro = registro;
@@ -55,21 +54,21 @@ public class Responsavel {
     }
 
     public void setEndereco(Endereco endereco) {
-        if(endereco == null) {
+        if (endereco == null) {
             throw new RuntimeException("Endereço não pode ser nulo");
         }
         this.endereco = endereco;
     }
 
     public void setNome(String nome) {
-        if(nome == null) {
+        if (nome == null) {
             throw new RuntimeException("Nome não pode ser nulo");
         }
         this.nome = nome;
     }
 
     public void setRg(String rg) { // checar
-        if(rg.length() != 7) {
+        if (rg.length() != 7) {
             throw new RuntimeException("RG invalido");
         }
         this.rg = rg;
