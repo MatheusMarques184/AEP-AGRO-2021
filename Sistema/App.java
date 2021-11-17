@@ -13,7 +13,7 @@ public class App {
         String nomeProdutor = nome.nextLine();
         cadastro.setNome(nomeProdutor);
 
-        System.out.print("Cpf: "); // int
+        System.out.print("Cpf: "); 
         Scanner cpf = new Scanner(System.in);
         String cpfProdutor = cpf.nextLine();
         cadastro.setCpf(cpfProdutor);
@@ -455,17 +455,11 @@ public class App {
         }
 
     }
-
-    // antes plantar semente tem que adubar
-    /*
-     * Volume de calda gasto será obtido multiplicando-se a vazão do pulverizador
-     * (15,38 litros/min) pelo tempo que se gasta para a pulverização (9,52 min/ha).
-     * Volume consumido/ha = 15,38x9,52 = 146,46 litros/ha.
-     */
+    
     public static void ConsultarLote(List<Lote> listaLote) {
 
         for (Lote lote : listaLote) {
-            System.out.println("Id-Lote: " + lote.getIdLote() + "\nRegistro responsavel por Lote: "
+            System.out.println("\nId-Lote: " + lote.getIdLote() + "\nRegistro responsavel por Lote: "
                     + lote.getRegistroResponsavel() + "\nTamanho do Lote em hectare: " + lote.getHectare()
                     + "\nCultura: " + lote.getCultura().getTipoCultura() + "\nCiclo plantio: "
                     + lote.getCultura().getCicloPlantio() + "\nTempo de descanso do solo pos plantio: "
@@ -648,7 +642,7 @@ public class App {
             List<Lote> listaLote) {
         int opcao = 0;
         do {
-            System.out.print("##--         Menu         --##\n\n");
+            System.out.print("##--         Menu             --##\n\n");
             System.out.print("|--------------------------------|\n");
             System.out.print("| Opção 1 - Consultar Demanda    |\n");
             System.out.print("| Opção 2 - Criar     Responsavel|\n");
@@ -701,7 +695,7 @@ public class App {
     public static void MenuCooperativa(Scanner menu, List<Demanda> list) {
         int opcao = 0;
         do {
-            System.out.print("##--         Menu         --##\n\n");
+            System.out.print("##--         Menu             --##\n\n");
             System.out.print("|--------------------------------|\n");
             System.out.print("| Opção 1 - Informar Demanda     |\n");
             System.out.print("| Opção 2 - Sair                 |\n");
@@ -733,7 +727,7 @@ public class App {
         int opcao = 0;
         do {
             // System.out.flush();
-            System.out.print("##--         Menu        --##\n\n");
+            System.out.print("##--         Menu            --##\n\n");
             System.out.print("|-------------------------------|\n");
             System.out.print("| Opção 1 - Cadastro Produtor   |\n");
             System.out.print("| Opção 2 - Cadastro Cooperativa|\n");
