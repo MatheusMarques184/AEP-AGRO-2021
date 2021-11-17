@@ -13,7 +13,7 @@ public class App {
         String nomeProdutor = nome.nextLine();
         cadastro.setNome(nomeProdutor);
 
-        System.out.print("Cpf: "); 
+        System.out.print("Cpf: ");
         Scanner cpf = new Scanner(System.in);
         String cpfProdutor = cpf.nextLine();
         cadastro.setCpf(cpfProdutor);
@@ -152,8 +152,9 @@ public class App {
     }
 
     public static void ConsultarDemanda(List<Demanda> list) {
+        System.out.println("Lista Demanda(s)");
         for (Demanda demanda2 : list) {
-            System.out.println("Demanda: " + demanda2.getDemanda() + "\nQuantidade: " + demanda2.getqDemanda());
+            System.out.println("\nDemanda: " + demanda2.getDemanda() + "\nQuantidade: " + demanda2.getqDemanda());
         }
     }
 
@@ -221,8 +222,9 @@ public class App {
     }
 
     public static void ConsultarResponsavel(List<Responsavel> listaResponsavel) {
+        System.out.println("Lista Responsavel(s)");
         for (Responsavel responsavel2 : listaResponsavel) {
-            System.out.println("Nome: " + responsavel2.getNome() + "\nRegistro: " + responsavel2.getRegistro()
+            System.out.println("\nNome: " + responsavel2.getNome() + "\nRegistro: " + responsavel2.getRegistro()
                     + "\nCep: " + responsavel2.getEndereco().getCep() + "\nNumero Residencia: "
                     + responsavel2.getEndereco().getNumeroResidencia() + "\nBairro: "
                     + responsavel2.getEndereco().getBairro() + "\nRua: " + responsavel2.getEndereco().getRua()
@@ -324,6 +326,9 @@ public class App {
 
                     case 10:
 
+                        break;
+                    default:
+                        System.out.print("\nOpção Inválida!");
                         break;
                     }
                 } while (opcao != 10);
@@ -455,9 +460,9 @@ public class App {
         }
 
     }
-    
-    public static void ConsultarLote(List<Lote> listaLote) {
 
+    public static void ConsultarLote(List<Lote> listaLote) {
+        System.out.println("Lista de Lote(s)");
         for (Lote lote : listaLote) {
             System.out.println("\nId-Lote: " + lote.getIdLote() + "\nRegistro responsavel por Lote: "
                     + lote.getRegistroResponsavel() + "\nTamanho do Lote em hectare: " + lote.getHectare()
@@ -470,7 +475,7 @@ public class App {
                     + lote.getCultura().getAgrotoxico().getTipoAgrotoxico() + "\nVazão do pulverisador em L/min: "
                     + lote.getCultura().getAgrotoxico().getVazaoPulverizador() + "\nTempo para pulverisar em min/ha: "
                     + lote.getCultura().getAgrotoxico().getTempoParaPulverizar());
-            System.out.println(" Quantidade de adubo aplicado por linha: " + lote.calcularAduboAplicadoPorLinha());
+            System.out.println("Quantidade de adubo aplicado por linha: " + lote.calcularAduboAplicadoPorLinha());
             System.out.println("Dosagem do agrotoxico por hectar: "
                     + lote.getCultura().getAgrotoxico().CalculaVolumeDosagemAgrotoxico());
         }
@@ -606,8 +611,12 @@ public class App {
                     case 14:
 
                         break;
+                    default:
+                        System.out.print("\nOpção Inválida!");
+                        break;
 
                     }
+
                 } while (opcao != 14);
                 break;
             } else {
@@ -688,6 +697,9 @@ public class App {
                 break;
             case 10:
                 break;
+            default:
+                System.out.print("\nOpção Inválida!");
+                break;
             }
         } while (opcao != 10);
     }
@@ -708,6 +720,9 @@ public class App {
                 InformarDemanda(list);
                 break;
             case 2:
+                break;
+            default:
+                System.out.print("\nOpção Inválida!");
                 break;
             }
         } while (opcao != 2);
