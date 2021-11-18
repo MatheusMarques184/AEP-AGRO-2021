@@ -130,12 +130,12 @@ public class App {
     public static void InformarDemanda(List<Demanda> list) {
         while (true) {
             Demanda demanda = new Demanda();
-            System.out.println("Informe demanda: ");
+            System.out.print("Informe demanda: ");
             Scanner nomeDemanda = new Scanner(System.in);
             String dem = nomeDemanda.nextLine();
             demanda.setDemanda(dem);
 
-            System.out.println("Informe quantidade: ");
+            System.out.print("Informe quantidade: ");
             Scanner quantidade = new Scanner(System.in);
             String qDemanda = quantidade.nextLine();
             demanda.setqDemanda(qDemanda);
@@ -222,7 +222,7 @@ public class App {
     }
 
     public static void ConsultarResponsavel(List<Responsavel> listaResponsavel) {
-        System.out.println("Lista Responsavel(s)");
+        System.out.println("Lista Responsavel(s) cadastrados");
         for (Responsavel responsavel2 : listaResponsavel) {
             System.out.println("\nNome: " + responsavel2.getNome() + "\nRegistro: " + responsavel2.getRegistro()
                     + "\nCep: " + responsavel2.getEndereco().getCep() + "\nNumero Residencia: "
@@ -240,7 +240,7 @@ public class App {
             System.out.println("Opção " + i + "\nNome: " + listaResponsavel.get(i).getNome() + "\nRegistro: "
                     + listaResponsavel.get(i).getRegistro());
 
-            System.out.println("Escolha responsavel para editar: ");
+            System.out.println("Escolha a opção para editar: ");
             op = menu.nextInt();
             if (op == i) {
                 System.out.println("ESCOLHA OS CAMPOS PARA EDITAR");
@@ -261,19 +261,21 @@ public class App {
                     System.out.print("|--------------------------------|\n");
                     System.out.print("Digite uma opção: ");
                     opcao = menu.nextInt();
-
+                    
                     switch (opcao) {
                     case 1:
                         System.out.print("Novo Nome: ");
                         Scanner res = new Scanner(System.in);
                         String nomeResponsavel = res.nextLine();
                         listaResponsavel.get(op).setNome(nomeResponsavel);
+                        System.out.print("Campo editado");
                         break;
                     case 2:
                         System.out.print("Novo Registro: ");
                         Scanner registro = new Scanner(System.in);
                         String registroResponsavel = registro.nextLine();
                         listaResponsavel.get(op).setRegistro(registroResponsavel);
+                        System.out.print("Campo editado");
                         break;
 
                     case 3:
@@ -281,6 +283,7 @@ public class App {
                         Scanner cep = new Scanner(System.in);
                         String cepResponsavel = cep.nextLine();
                         listaResponsavel.get(op).getEndereco().setCep(cepResponsavel);
+                        System.out.print("Campo editado");
                         break;
 
                     case 4:
@@ -288,6 +291,7 @@ public class App {
                         Scanner rua = new Scanner(System.in);
                         String ruaEndereco = rua.nextLine();
                         listaResponsavel.get(op).getEndereco().setRua(ruaEndereco);
+                        System.out.print("Campo editado");
                         break;
 
                     case 5:
@@ -295,6 +299,7 @@ public class App {
                         Scanner bairro = new Scanner(System.in);
                         String bairroEndereco = bairro.nextLine();
                         listaResponsavel.get(op).getEndereco().setBairro(bairroEndereco);
+                        System.out.print("Campo editado");
                         break;
 
                     case 6:
@@ -302,6 +307,7 @@ public class App {
                         Scanner numero = new Scanner(System.in);
                         String numeroRes = numero.nextLine();
                         listaResponsavel.get(op).getEndereco().setNumeroResidencia(numeroRes);
+                        System.out.print("Campo editado");
                         break;
 
                     case 7:
@@ -309,11 +315,13 @@ public class App {
                         Scanner cpf = new Scanner(System.in);
                         String cpfResponsavel = cpf.nextLine();
                         listaResponsavel.get(op).setCpf(cpfResponsavel);
+                        System.out.print("Campo editado");
                         break;
                     case 8:
                         System.out.print("Novo RG: ");
                         Scanner rg = new Scanner(System.in);
                         String rgResponsavel = rg.nextLine();
+                        System.out.print("Campo editado");
                         listaResponsavel.get(op).setRg(rgResponsavel);
                         break;
 
@@ -321,6 +329,7 @@ public class App {
                         System.out.print("Nova Senha: ");
                         Scanner senha = new Scanner(System.in);
                         String senhaResponsavel = senha.nextLine();
+                        System.out.print("Campo editado");
                         listaResponsavel.get(op).setSenha(senhaResponsavel);
                         break;
 
@@ -344,15 +353,15 @@ public class App {
 
     public static void ExcluirResponsavel(List<Responsavel> listaResponsavel) {// fazer pelo nome
         for (Responsavel responsavel : listaResponsavel) {
-            System.out.println("\nResponsaveis: " + responsavel.getNome());
+            System.out.println("\nResgistro Responsavel: " + responsavel.getRegistro());
         }
 
         for (int i = 0; i < listaResponsavel.size(); i++) {
-            System.out.print("Nome: ");
-            Scanner nome = new Scanner(System.in);
-            String nomeRes = nome.nextLine();
+            System.out.print("Registro: ");
+            Scanner registro = new Scanner(System.in);
+            String registroResponsavel = registro.nextLine();
             Responsavel r = listaResponsavel.get(i);
-            if (r.getNome().equals(nomeRes)) {
+            if (r.getRegistro().equals(registroResponsavel)) {
                 listaResponsavel.remove(r);
                 break;
             }
@@ -462,7 +471,7 @@ public class App {
     }
 
     public static void ConsultarLote(List<Lote> listaLote) {
-        System.out.println("Lista de Lote(s)");
+        System.out.println("Lista de Lote(s) cadastrados");
         for (Lote lote : listaLote) {
             System.out.println("\nId-Lote: " + lote.getIdLote() + "\nRegistro responsavel por Lote: "
                     + lote.getRegistroResponsavel() + "\nTamanho do Lote em hectare: " + lote.getHectare()
@@ -487,7 +496,7 @@ public class App {
         int op = -1;
         for (int i = 0; i < listaLote.size();) {
             System.out.println("Opção " + i + "\nId-Lote: " + listaLote.get(i).getIdLote());
-            System.out.println("Escolha Lote para editar: ");
+            System.out.println("Escolha opção para editar: ");
             op = menu.nextInt();
             if (op == i) {
                 System.out.println("ESCOLHA QUAIS CAMPOS DESEJA EDITAR");
@@ -518,13 +527,15 @@ public class App {
                         Scanner registro = new Scanner(System.in);
                         String registroResponsavel = registro.nextLine();
                         listaLote.get(op).setRegistroResponsavel(registroResponsavel);
+                        System.out.print("Campo editado");
                         break;
-
+                        
                     case 2:
                         System.out.print("Novo Tamanho do lote em hectare: ");
                         Scanner hectar = new Scanner(System.in);
                         String hectarLote = hectar.nextLine();
                         listaLote.get(op).setHectare(hectarLote);
+                        System.out.print("Campo editado");
                         break;
 
                     case 3:
@@ -532,6 +543,7 @@ public class App {
                         Scanner tipo = new Scanner(System.in);
                         String tipoCultura = tipo.nextLine();
                         listaLote.get(op).getCultura().setTipoCultura(tipoCultura);
+                        System.out.print("Campo editado");
                         break;
 
                     case 4:
@@ -539,6 +551,7 @@ public class App {
                         Scanner ciclo = new Scanner(System.in);
                         String cicloCultura = ciclo.nextLine();
                         listaLote.get(op).getCultura().setCicloPlantio(cicloCultura);
+                        System.out.print("Campo editado");
                         break;
 
                     case 5:
@@ -546,6 +559,7 @@ public class App {
                         Scanner descanso = new Scanner(System.in);
                         String descansoSolo = descanso.nextLine();
                         listaLote.get(op).getCultura().setDescansoPosPlantio(descansoSolo);
+                        System.out.print("Campo editado");
                         break;
 
                     case 6:
@@ -553,6 +567,7 @@ public class App {
                         Scanner marca = new Scanner(System.in);
                         String marcaAdubo = marca.nextLine();
                         listaLote.get(op).getCultura().getAdubo().setMarcaAdubo(marcaAdubo);
+                        System.out.print("Campo editado");
                         break;
 
                     case 7:
@@ -560,6 +575,7 @@ public class App {
                         Scanner tipoA = new Scanner(System.in);
                         String tipoAdubo = tipoA.nextLine();
                         listaLote.get(op).getCultura().getAdubo().setTipoAdubo(tipoAdubo);
+                        System.out.print("Campo editado");
                         break;
 
                     case 8:
@@ -568,6 +584,7 @@ public class App {
                         String espacamentoSulgo = espacamento.nextLine();
                         double espacamentoSulgoInteiro = Double.parseDouble(espacamentoSulgo);
                         listaLote.get(op).getCultura().setEspacamentoSulgo(espacamentoSulgoInteiro);
+                        System.out.print("Campo editado");
                         break;
 
                     case 9:
@@ -575,6 +592,7 @@ public class App {
                         Scanner duracao = new Scanner(System.in);
                         String duracaoAdubo = duracao.nextLine();
                         listaLote.get(op).getCultura().getAdubo().setDuracaoAdubo(duracaoAdubo);
+                        System.out.print("Campo editado");
                         break;
 
                     case 10:
@@ -583,6 +601,7 @@ public class App {
                         String quantAduboHectar = quantAdubo.nextLine();
                         double quantAduboHectarInteiro = Double.parseDouble(quantAduboHectar);
                         listaLote.get(op).getCultura().getAdubo().setQuantidadeAduboPorHectar(quantAduboHectarInteiro);
+                        System.out.print("Campo editado");
                         break;
 
                     case 11:
@@ -590,6 +609,7 @@ public class App {
                         Scanner tipoAgro = new Scanner(System.in);
                         String tipoAgrotoxico = tipoAgro.nextLine();
                         listaLote.get(op).getCultura().getAgrotoxico().setTipoAgrotoxico(tipoAgrotoxico);
+                        System.out.print("Campo editado");
                         break;
 
                     case 12:
@@ -598,6 +618,7 @@ public class App {
                         String vazaoPulverizador = vazao.nextLine();
                         double vazaoPulverizadorReal = Double.parseDouble(vazaoPulverizador);
                         listaLote.get(op).getCultura().getAgrotoxico().setVazaoPulverizador(vazaoPulverizadorReal);
+                        System.out.print("Campo editado");
                         break;
 
                     case 13:
@@ -606,6 +627,7 @@ public class App {
                         String tempoPulverizarString = tempoPulverizar.nextLine();
                         double tempoParaPulverizar = Double.parseDouble(tempoPulverizarString);
                         listaLote.get(op).getCultura().getAgrotoxico().setTempoParaPulverizar(tempoParaPulverizar);
+                        System.out.print("Campo editado");
                         break;
 
                     case 14:

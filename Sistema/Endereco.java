@@ -26,7 +26,7 @@ public class Endereco {
         this.bairro = bairro;
     }
     public void setCep(String cep) {
-        if(cep == null) {
+        if(cep == null || cep.length() != 8) {
             throw new RuntimeException("CEP não pode ner nulo");
         }
         this.cep = cep;
