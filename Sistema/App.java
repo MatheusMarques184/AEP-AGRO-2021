@@ -74,7 +74,7 @@ public class App {
             if ((loginGeral.getRegistro().equals(listaResponsavel.get(i).getRegistro()))
                     && ((loginGeral.getSenha().equals(listaResponsavel.get(i).getSenha())))
                     || ((loginGeral.getRegistro().equals("usuario")) && (loginGeral.getSenha().equals("1234567")))) {
-                System.out.print("\nLogin realizado com sucesso\n");
+                System.out.println("Login valido");
             } else {
                 System.out.println("Login invalido");
             }
