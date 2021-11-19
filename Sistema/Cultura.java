@@ -1,7 +1,5 @@
 package Sistema;
 
-import java.nio.channels.ReadPendingException;
-
 public class Cultura {
     private String tipoCultura;
     private String cicloPlantio;
